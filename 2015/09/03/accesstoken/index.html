@@ -3,21 +3,78 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Hello World | 悟者</title>
+  <title>悟者</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Quick">
+  <meta name="description" content="AccessToken课程目标
+自定义对象
+构造函数
+归档 &amp;amp; 接档
+
+接口定义文档地址http://open.weibo.com/wiki/OAuth2/access_token
+接口地址https://api.weibo.com/oauth2/access_token
+HTTP 请求方式
+POST
+
+请求参数
+
+
+参数
+描述
+
+
+
+
+client_id
+申请应用时分配的AppKey">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http://wuzer.me/2015/08/28/hello-world/index.html">
+<meta property="og:title" content="悟者">
+<meta property="og:url" content="http://wuzer.me/2015/09/03/accesstoken/index.html">
 <meta property="og:site_name" content="悟者">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Quick">
-<meta property="og:updated_time" content="2015-08-28T13:27:42.000Z">
+<meta property="og:description" content="AccessToken课程目标
+自定义对象
+构造函数
+归档 &amp;amp; 接档
+
+接口定义文档地址http://open.weibo.com/wiki/OAuth2/access_token
+接口地址https://api.weibo.com/oauth2/access_token
+HTTP 请求方式
+POST
+
+请求参数
+
+
+参数
+描述
+
+
+
+
+client_id
+申请应用时分配的AppKey">
+<meta property="og:updated_time" content="2015-08-31T19:57:32.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hello World">
-<meta name="twitter:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Quick">
+<meta name="twitter:title" content="悟者">
+<meta name="twitter:description" content="AccessToken课程目标
+自定义对象
+构造函数
+归档 &amp;amp; 接档
+
+接口定义文档地址http://open.weibo.com/wiki/OAuth2/access_token
+接口地址https://api.weibo.com/oauth2/access_token
+HTTP 请求方式
+POST
+
+请求参数
+
+
+参数
+描述
+
+
+
+
+client_id
+申请应用时分配的AppKey">
   
     <link rel="alternative" href="/atom.xml" title="悟者" type="application/atom+xml">
   
@@ -190,11 +247,11 @@ Quick">
 		</header>				
 	</div>
 </nav>
-      <div class="body-wrap"><article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-accesstoken" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2015/08/28/hello-world/" class="article-date">
-  	<time datetime="2015-08-28T13:27:42.000Z" itemprop="datePublished">2015-08-28</time>
+      <a href="/2015/09/03/accesstoken/" class="article-date">
+  	<time datetime="2015-09-03T02:50:52.000Z" itemprop="datePublished">2015-09-03</time>
 </a>
     </div>
   
@@ -203,35 +260,74 @@ Quick">
       <input type="hidden" class="isFancy" />
     
     
-      <header class="article-header">
-        
-  
-    <h1 class="article-title" itemprop="name">
-      Hello World
-    </h1>
-  
-
-      </header>
-      
-      <div class="article-info article-info-post">
-        
-        
-
-        <div class="clearfix"></div>
-      </div>
-      
-    
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Welcome to <a href="http://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="http://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="http://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick_Start">Quick Start</h2><h3 id="Create_a_new_post">Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run_server">Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate_static_files">Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy_to_remote_sites">Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+        <h1 id="AccessToken">AccessToken</h1><h2 id="课程目标">课程目标</h2><ul>
+<li>自定义对象</li>
+<li>构造函数</li>
+<li>归档 &amp; 接档</li>
+</ul>
+<h2 id="接口定义">接口定义</h2><h3 id="文档地址">文档地址</h3><p><a href="http://open.weibo.com/wiki/OAuth2/access_token" target="_blank" rel="external">http://open.weibo.com/wiki/OAuth2/access_token</a></p>
+<h3 id="接口地址">接口地址</h3><p><a href="https://api.weibo.com/oauth2/access_token" target="_blank" rel="external">https://api.weibo.com/oauth2/access_token</a></p>
+<h3 id="HTTP_请求方式">HTTP 请求方式</h3><ul>
+<li>POST</li>
+</ul>
+<h3 id="请求参数">请求参数</h3><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>client_id</td>
+<td>申请应用时分配的AppKey</td>
+</tr>
+<tr>
+<td>client_secret</td>
+<td>申请应用时分配的AppSecret</td>
+</tr>
+<tr>
+<td>grant_type</td>
+<td>请求的类型，填写 <code>authorization_code</code></td>
+</tr>
+<tr>
+<td>code</td>
+<td>调用authorize获得的code值</td>
+</tr>
+<tr>
+<td>redirect_uri</td>
+<td>回调地址，需需与注册应用里的回调地址一致</td>
+</tr>
+</tbody>
+</table>
+<h3 id="返回数据">返回数据</h3><table>
+<thead>
+<tr>
+<th>返回值字段</th>
+<th>字段说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>access_token</td>
+<td>用于调用access_token，接口获取授权后的access token</td>
+</tr>
+<tr>
+<td>expires_in</td>
+<td>access_token的生命周期，单位是秒数</td>
+</tr>
+<tr>
+<td>remind_in</td>
+<td>access_token的生命周期（该参数即将废弃，开发者请使用expires_in）</td>
+</tr>
+<tr>
+<td>uid</td>
+<td>当前授权用户的UID</td>
+</tr>
+</tbody>
+</table>
 
       
     </div>
@@ -241,7 +337,7 @@ Quick">
     
 <nav id="article-nav">
   
-    <a href="/2015/09/03/README/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2015/09/03/createproject-01-createfiles/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption"><</strong>
       <div class="article-nav-title">
         
@@ -250,6 +346,11 @@ Quick">
       </div>
     </a>
   
+  
+    <a href="/2015/09/03/accesstoken-04-view_model/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title"></div>
+      <strong class="article-nav-caption">></strong>
+    </a>
   
 </nav>
 
@@ -276,7 +377,7 @@ Quick">
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="hello-world" data-title="Hello World" data-url="http://wuzer.me/2015/08/28/hello-world/"></div>
+	<div class="ds-thread" data-thread-key="accesstoken" data-title="" data-url="http://wuzer.me/2015/09/03/accesstoken/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">

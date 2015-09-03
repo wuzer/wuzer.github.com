@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>悟者</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="加载用户信息课程目标
+通过 AccessToken 获取新浪微博网络数据
+
+接口定义文档地址http://open.weibo.com/wiki/2/users/show
+接口地址https://api.weibo.com/2/users/show.json
+HTTP 请求方式
+GET
+
+请求参数
+
+
+参数
+描述
+
+
+
+
+access_token
+采用OAuth授权方式为必填参数，其他授权方式不需">
+<meta property="og:type" content="article">
+<meta property="og:title" content="悟者">
+<meta property="og:url" content="http://wuzer.me/2015/09/03/accesstoken-04-loaduserinfo/index.html">
+<meta property="og:site_name" content="悟者">
+<meta property="og:description" content="加载用户信息课程目标
+通过 AccessToken 获取新浪微博网络数据
+
+接口定义文档地址http://open.weibo.com/wiki/2/users/show
+接口地址https://api.weibo.com/2/users/show.json
+HTTP 请求方式
+GET
+
+请求参数
+
+
+参数
+描述
+
+
+
+
+access_token
+采用OAuth授权方式为必填参数，其他授权方式不需">
+<meta property="og:updated_time" content="2015-08-31T23:16:26.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="悟者">
+<meta name="twitter:description" content="加载用户信息课程目标
+通过 AccessToken 获取新浪微博网络数据
+
+接口定义文档地址http://open.weibo.com/wiki/2/users/show
+接口地址https://api.weibo.com/2/users/show.json
+HTTP 请求方式
+GET
+
+请求参数
+
+
+参数
+描述
+
+
+
+
+access_token
+采用OAuth授权方式为必填参数，其他授权方式不需">
+  
+    <link rel="alternative" href="/atom.xml" title="悟者" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="null" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">wuzer</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">就是玩票怎么滴</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/第一篇">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="/#" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="/weibo.com/94217117" title="weibo">weibo</a>
+					        
+								<a class="rss" target="_blank" href="/#" title="rss">rss</a>
+					        
+								<a class="zhihu" target="_blank" href="/#" title="zhihu">zhihu</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">奥巴马的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">卡卡的美丽传说</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">唯有美食与你不可辜负</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">wuzer</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="null" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">wuzer</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">就是玩票怎么滴</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/第一篇">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="/#" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="/weibo.com/94217117" title="weibo">weibo</a>
+			        
+						<a class="rss" target="_blank" href="/#" title="rss">rss</a>
+			        
+						<a class="zhihu" target="_blank" href="/#" title="zhihu">zhihu</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-accesstoken-04-loaduserinfo" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/09/03/accesstoken-04-loaduserinfo/" class="article-date">
+  	<time datetime="2015-09-03T02:50:52.000Z" itemprop="datePublished">2015-09-03</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="加载用户信息">加载用户信息</h1><h2 id="课程目标">课程目标</h2><ul>
+<li>通过 <code>AccessToken</code> 获取新浪微博网络数据</li>
+</ul>
+<h2 id="接口定义">接口定义</h2><h3 id="文档地址">文档地址</h3><p><a href="http://open.weibo.com/wiki/2/users/show" target="_blank" rel="external">http://open.weibo.com/wiki/2/users/show</a></p>
+<h3 id="接口地址">接口地址</h3><p><a href="https://api.weibo.com/2/users/show.json" target="_blank" rel="external">https://api.weibo.com/2/users/show.json</a></p>
+<h3 id="HTTP_请求方式">HTTP 请求方式</h3><ul>
+<li>GET</li>
+</ul>
+<h3 id="请求参数">请求参数</h3><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>access_token</td>
+<td>采用OAuth授权方式为必填参数，其他授权方式不需要此参数，OAuth授权后获得</td>
+</tr>
+<tr>
+<td>uid</td>
+<td>需要查询的用户ID</td>
+</tr>
+</tbody>
+</table>
+<h3 id="返回数据">返回数据</h3><table>
+<thead>
+<tr>
+<th>返回值字段</th>
+<th>字段说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>name</td>
+<td>友好显示名称</td>
+</tr>
+<tr>
+<td>avatar_large</td>
+<td>用户头像地址（大图），180×180像素</td>
+</tr>
+</tbody>
+</table>
+<h3 id="测试_URL">测试 URL</h3><p><a href="https://api.weibo.com/2/users/show.json?access_token=2.00ml8IrF0qLZ9W5bc20850c50w9hi9&amp;uid=5365823342" target="_blank" rel="external">https://api.weibo.com/2/users/show.json?access_token=2.00ml8IrF0qLZ9W5bc20850c50w9hi9&amp;uid=5365823342</a></p>
+<h2 id="代码实现">代码实现</h2><ul>
+<li>在 <code>NetworkTools</code> 中封装 GET 方法</li>
+</ul>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/// 加载用户信息</span></span><br><span class="line"><span class="comment">///</span></span><br><span class="line"><span class="comment">/// - parameter uid: uid</span></span><br><span class="line"><span class="comment">/// - see: [http://open.weibo.com/wiki/2/users/show](http://open.weibo.com/wiki/2/users/show)</span></span><br><span class="line"><span class="func"><span class="keyword">func</span> <span class="title">loadUser</span><span class="params">(uid: String)</span></span> &#123;</span><br><span class="line">    <span class="keyword">let</span> urlString = <span class="string">"https://api.weibo.com/2/users/show.json"</span></span><br><span class="line">    <span class="keyword">let</span> params = [<span class="string">"uid"</span>: uid]</span><br><span class="line"></span><br><span class="line">    request(.<span class="type">GET</span>, <span class="type">URLString</span>: urlString, parameters: params, withToken: <span class="literal">true</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>修改 <code>request</code> 函数，增加 <code>withToken</code> 参数</li>
+</ul>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/// 发起网络请求</span></span><br><span class="line"><span class="comment">///</span></span><br><span class="line"><span class="comment">/// - parameter method:     HTTP 方法 GET / POST</span></span><br><span class="line"><span class="comment">/// - parameter URLString:  URLString</span></span><br><span class="line"><span class="comment">/// - parameter parameters: 参数字典</span></span><br><span class="line"><span class="comment">/// - parameter withToken:  是否包含 accessToken，默认为 true</span></span><br><span class="line"><span class="comment">///</span></span><br><span class="line"><span class="comment">/// - returns: RAC Signal</span></span><br><span class="line"><span class="func"><span class="keyword">func</span> <span class="title">request</span><span class="params">(method: RequestMethod, URLString: String, <span class="keyword">var</span> parameters: [String: AnyObject]?, withToken: Bool = <span class="literal">true</span>)</span></span> -&gt; <span class="type">RACSignal</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="type">RACSignal</span>.createSignal(&#123; (subscriber) -&gt; <span class="type">RACDisposable</span>! <span class="keyword">in</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// 0. 检查 token</span></span><br><span class="line">        <span class="keyword">if</span> <span class="type">UserAccountViewModel</span>.sharedUserAccount.accessToken == <span class="literal">nil</span> &amp;&amp; withToken &#123;</span><br><span class="line">            subscriber.sendError(<span class="type">NSError</span>(domain: <span class="string">"com.itheima.weibo.error"</span>, code: -<span class="number">1001</span>, userInfo: [<span class="string">"错误信息"</span>: <span class="string">"Token 为 nil"</span>]))</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">nil</span></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 设置 token</span></span><br><span class="line">        <span class="keyword">if</span> withToken &#123;</span><br><span class="line">            parameters![<span class="string">"access_token"</span>] = <span class="type">UserAccountViewModel</span>.sharedUserAccount.accessToken!</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        ...</span><br></pre></td></tr></table></figure>
+<ul>
+<li>修改 <code>loadAccessToken</code> 函数增加 <code>withToken</code> 参数</li>
+</ul>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">return</span> request(.<span class="type">POST</span>, <span class="type">URLString</span>: urlString, parameters: params, withToken: <span class="literal">false</span>)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>测试运行，确认代码运行正确</p>
+</blockquote>
+<ul>
+<li>在 <code>UserAccountViewModel</code> 中增加加载用户调用</li>
+</ul>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 加载用户信息</span></span><br><span class="line"><span class="type">NetworkTools</span>.sharedTools.loadUser(account.uid!).subscribeNext(&#123; (<span class="type">JSON</span>) -&gt; <span class="type">Void</span> <span class="keyword">in</span></span><br><span class="line"></span><br><span class="line">    <span class="built_in">print</span>(<span class="type">JSON</span>)</span><br><span class="line"></span><br><span class="line">    &#125;, error: &#123; (error) -&gt; <span class="type">Void</span> <span class="keyword">in</span></span><br><span class="line">        <span class="built_in">print</span>(error)</span><br><span class="line">    &#125;) &#123;&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>在 <code>UserAccount</code> 中增加用户名和头像属性</li>
+</ul>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/// 友好显示名称</span></span><br><span class="line"><span class="keyword">var</span> name: <span class="type">String</span>?</span><br><span class="line"><span class="comment">/// 用户头像地址（大图），180×180像素</span></span><br><span class="line"><span class="keyword">var</span> avatar_large: <span class="type">String</span>?</span><br></pre></td></tr></table></figure>
+<ul>
+<li>修改归档 &amp; 解档代码</li>
+</ul>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="func"><span class="keyword">func</span> <span class="title">encodeWithCoder</span><span class="params">(aCoder: NSCoder)</span></span> &#123;</span><br><span class="line">    aCoder.encodeObject(access_token, forKey: <span class="string">"access_token"</span>)</span><br><span class="line">    aCoder.encodeObject(expiresDate, forKey: <span class="string">"expiresDate"</span>)</span><br><span class="line">    aCoder.encodeObject(uid, forKey: <span class="string">"uid"</span>)</span><br><span class="line">    aCoder.encodeObject(name, forKey: <span class="string">"name"</span>)</span><br><span class="line">    aCoder.encodeObject(avatar_large, forKey: <span class="string">"avatar_large"</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">required <span class="keyword">init</span>?(coder aDecoder: <span class="type">NSCoder</span>) &#123;</span><br><span class="line">    access_token = aDecoder.decodeObjectForKey(<span class="string">"access_token"</span>) <span class="keyword">as</span>? <span class="type">String</span></span><br><span class="line">    expiresDate = aDecoder.decodeObjectForKey(<span class="string">"expiresDate"</span>) <span class="keyword">as</span>? <span class="type">NSDate</span></span><br><span class="line">    uid = aDecoder.decodeObjectForKey(<span class="string">"uid"</span>) <span class="keyword">as</span>? <span class="type">String</span></span><br><span class="line">    name = aDecoder.decodeObjectForKey(<span class="string">"name"</span>) <span class="keyword">as</span>? <span class="type">String</span></span><br><span class="line">    avatar_large = aDecoder.decodeObjectForKey(<span class="string">"avatar_large"</span>) <span class="keyword">as</span>? <span class="type">String</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>修改 <code>loadAccessToken</code> 函数</li>
+</ul>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/// 加载AccessToken和账户信息</span></span><br><span class="line"><span class="comment">///</span></span><br><span class="line"><span class="comment">/// - parameter code:     请求码</span></span><br><span class="line"><span class="comment">/// - parameter finished: 完成回调</span></span><br><span class="line"><span class="func"><span class="keyword">func</span> <span class="title">loadUserAccount</span><span class="params">(code: String, finished: <span class="params">(error: NSError?)</span></span></span>-&gt;()) &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> netError = <span class="type">NSError</span>(domain: <span class="string">"domain"</span>, code: -<span class="number">1001</span>, userInfo: <span class="literal">nil</span>)</span><br><span class="line"></span><br><span class="line">    <span class="type">NetworkTools</span>.sharedTools.loadAccessToken(code).subscribeNext(&#123; (result) -&gt; <span class="type">Void</span> <span class="keyword">in</span></span><br><span class="line">        guard <span class="keyword">let</span> <span class="type">JSON</span> = result <span class="keyword">as</span>? [<span class="type">String</span>: <span class="type">AnyObject</span>] <span class="keyword">else</span> &#123;</span><br><span class="line">            finished(error: netError)</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">let</span> account = <span class="type">UserAccount</span>(dict: <span class="type">JSON</span>).saveAccount()</span><br><span class="line"></span><br><span class="line">        <span class="type">NetworkTools</span>.sharedTools.loadUser(account.uid!).subscribeNext(&#123; (result) -&gt; <span class="type">Void</span> <span class="keyword">in</span></span><br><span class="line"></span><br><span class="line">            guard <span class="keyword">let</span> <span class="type">JSON</span> = result <span class="keyword">as</span>? [<span class="type">String</span>: <span class="type">AnyObject</span>] <span class="keyword">else</span> &#123;</span><br><span class="line">                finished(error: netError)</span><br><span class="line">                <span class="keyword">return</span></span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            account.name = <span class="type">JSON</span>[<span class="string">"name"</span>] <span class="keyword">as</span>? <span class="type">String</span></span><br><span class="line">            account.avatar_large = <span class="type">JSON</span>[<span class="string">"avatar_large"</span>] <span class="keyword">as</span>? <span class="type">String</span></span><br><span class="line">            account.saveAccount()</span><br><span class="line"></span><br><span class="line">            finished(error: <span class="literal">nil</span>)</span><br><span class="line"></span><br><span class="line">            &#125;, error: &#123; (error) -&gt; <span class="type">Void</span> <span class="keyword">in</span></span><br><span class="line">                finished(error: error)</span><br><span class="line">            &#125;, completed: &#123;&#125;)</span><br><span class="line"></span><br><span class="line">        &#125;, error: &#123; (error) -&gt; <span class="type">Void</span> <span class="keyword">in</span></span><br><span class="line">            finished(error: error)</span><br><span class="line">        &#125;, completed: &#123;&#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>修改 <code>OAuthViewController</code> 中的代码调用</li>
+</ul>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">UserAccountViewModel</span>.sharedUserAccount.loadUserAccount(code) &#123; (error) -&gt; () <span class="keyword">in</span></span><br><span class="line">    <span class="keyword">if</span> error != <span class="literal">nil</span> &#123;</span><br><span class="line">        <span class="type">SVProgressHUD</span>.showInfoWithStatus(<span class="string">"网络不给力"</span>)</span><br><span class="line"></span><br><span class="line">        dispatch_after(dispatch_time(<span class="type">DISPATCH_TIME_NOW</span>, <span class="type">Int64</span>(<span class="type">NSEC_PER_SEC</span>)), dispatch_get_main_queue()) &#123;</span><br><span class="line">            <span class="keyword">self</span>.close()</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">"登录成功"</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>每一个令牌授权一个 <code>特定的网站</code> 在 <code>特定的时段内</code> 访问 <code>特定的资源</code></p>
+</blockquote>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/09/03/accesstoken-04-view_model/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/09/03/accesstoken-03-archive/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title"></div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="accesstoken-04-loaduserinfo" data-title="" data-url="http://wuzer.me/2015/09/03/accesstoken-04-loaduserinfo/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2015 wuzer
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>
