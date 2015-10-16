@@ -1,0 +1,120 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  
+  <title>核心动画 | 悟者</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  
+    <meta name="author" content="wuzer">
+  
+  
+    <meta name="description" content="1234567891011121314151617181920212223242526/** CAKeyframeAnimation    path/values CABasicAnimation       fromValue/toValue */- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event &amp;#123;">
+  
+  <meta name="description" content="1234567891011121314151617181920212223242526/** CAKeyframeAnimation    path/values CABasicAnimation       fromValue/toValue */- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event &amp;#123;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="核心动画">
+<meta property="og:url" content="http://yoursite.com/2015/10/16/核心动画/index.html">
+<meta property="og:site_name" content="悟者">
+<meta property="og:description" content="1234567891011121314151617181920212223242526/** CAKeyframeAnimation    path/values CABasicAnimation       fromValue/toValue */- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event &amp;#123;">
+<meta property="og:updated_time" content="2015-10-16T08:12:10.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="核心动画">
+<meta name="twitter:description" content="1234567891011121314151617181920212223242526/** CAKeyframeAnimation    path/values CABasicAnimation       fromValue/toValue */- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event &amp;#123;">
+  
+    <link rel="alternate" href="/atom.xml" title="悟者" type="application/atom+xml">
+  
+  
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+</head>
+
+<body>
+  <div class="wrapper">
+    <header id="header">
+  <div class="title">
+    <h1><a href="/">悟者</a></h1>
+    <p><a href="/">90后,摩羯座,iOS攻城师</a></p>
+  </div>
+  <nav class="nav">
+    <ul>
+      
+        <li><a href="/">Home</a></li>
+      
+        <li><a href="/archives">Archives</a></li>
+      
+      
+        <li><a href="/atom.xml">RSS</a></li>
+      
+    </ul>
+    <div class="clearfix"></div>
+  </nav>
+  <div class="clearfix"></div>
+</header>
+    <div class="content"><article class="post">
+  <header>
+    
+      <div class="icon"></div>
+      <a href="/2015/10/16/核心动画/">
+  <time datetime="2015-10-16T08:11:47.000Z">
+    2015-10-16
+  </time>
+</a>
+    
+    
+  
+    <h1 class="title">核心动画</h1>
+  
+
+  </header>
+  
+  <div class="entry">
+    
+      <figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span><br><span class="line"> CAKeyframeAnimation    path/values</span><br><span class="line"> CABasicAnimation       fromValue/toValue</span><br><span class="line"> */</span></span><br><span class="line">- (<span class="keyword">void</span>)touchesBegan:(<span class="built_in">NSSet</span> *)touches withEvent:(<span class="built_in">UIEvent</span> *)event &#123;</span><br><span class="line">    <span class="comment">// 1. 位移动画</span></span><br><span class="line">    <span class="built_in">CAKeyframeAnimation</span> *anim1 = [<span class="built_in">CAKeyframeAnimation</span> animationWithKeyPath:<span class="string">@"position"</span>];</span><br><span class="line"></span><br><span class="line">    <span class="built_in">UIBezierPath</span> *path = [<span class="built_in">UIBezierPath</span> bezierPathWithOvalInRect:<span class="built_in">CGRectMake</span>(<span class="number">50</span>, <span class="number">50</span>, <span class="number">250</span>, <span class="number">250</span>)];</span><br><span class="line">    anim1<span class="variable">.path</span> = path<span class="variable">.CGPath</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 2. 旋转动画</span></span><br><span class="line">    <span class="built_in">CABasicAnimation</span> *anim2 = [<span class="built_in">CABasicAnimation</span> animationWithKeyPath:<span class="string">@"transform.rotation"</span>];</span><br><span class="line">    anim2<span class="variable">.toValue</span> = @(<span class="number">2</span> * M_PI);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 3. 缩放动画</span></span><br><span class="line">    <span class="built_in">CAKeyframeAnimation</span> *anim3 = [<span class="built_in">CAKeyframeAnimation</span> animationWithKeyPath:<span class="string">@"transform.scale"</span>];</span><br><span class="line">    anim3<span class="variable">.values</span> = @[@<span class="number">1</span>, @<span class="number">0.1</span>, @<span class="number">1.2</span>];</span><br><span class="line"></span><br><span class="line">    <span class="built_in">CAAnimationGroup</span> *group = [[<span class="built_in">CAAnimationGroup</span> alloc] init];</span><br><span class="line">    group<span class="variable">.animations</span> = @[anim1, anim2, anim3];</span><br><span class="line">    group<span class="variable">.duration</span> = <span class="number">2.0</span>;</span><br><span class="line">    group<span class="variable">.repeatCount</span> = MAXFLOAT;</span><br><span class="line"></span><br><span class="line">    [<span class="keyword">self</span><span class="variable">.myView</span><span class="variable">.layer</span> addAnimation:group forKey:<span class="literal">nil</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+    
+  </div>
+  <footer>
+    
+      
+      
+    
+    <div class="clearfix"></div>
+  </footer>
+</article>
+
+</div>
+  </div>
+  <footer id="footer"><div class="copyright">
+  
+  &copy; 2015 <a href="/">wuzer</a>
+  
+</div>
+<div class="theme-copyright">
+  Theme by <a href="https://github.com/orderedlist" target="_blank">orderedlist</a>
+   | 
+  Redesign by <a href="http://heroicyang.com/" target="_blank">Heroic Yang</a>
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+<script src="/js/scale.fix.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+  (function($){
+    $('.fancybox').fancybox();
+  })(jQuery);
+</script>
+
+</body>
+</html>
