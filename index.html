@@ -62,6 +62,81 @@
   <header>
     
       <div class="icon"></div>
+      <a href="/2015/10/16/NULL-nil-Nil-NSNULL/">
+  <time datetime="2015-10-16T08:02:11.000Z">
+    2015-10-16
+  </time>
+</a>
+    
+    
+  
+    <h1 class="title"><a href="/2015/10/16/NULL-nil-Nil-NSNULL/">NULL &amp; nil &amp; Nil &amp; NSNULL</a></h1>
+  
+
+  </header>
+  
+  <div class="entry">
+    
+      <ul>
+<li><code>nil</code>  是 OC 的，空对象，地址指向 空(0) 的对象<ul>
+<li>在 OC 中，可以给空对象发送任何消息，不会出现错误</li>
+</ul>
+</li>
+<li><code>NULL</code> 是 C 的，空地址，地址的数值是 0，是一个长整数<ul>
+<li>表示地址是空</li>
+</ul>
+</li>
+<li><code>NSNull</code> 用于解决向 <code>NSArray</code> 和 <code>NSDictionary</code> 等集合中添加空值的问题</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>值</th>
+<th>定义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NULL</td>
+<td>(void *)0</td>
+<td>C指针的字面零值</td>
+</tr>
+<tr>
+<td>nil</td>
+<td>(id)0</td>
+<td>Objective-C对象的字面零值</td>
+</tr>
+<tr>
+<td>Nil</td>
+<td>(Class)0</td>
+<td>Objective-C类的字面零值</td>
+</tr>
+<tr>
+<td>NSNull</td>
+<td>[NSNull null]</td>
+<td>用来表示零值的单独的对象</td>
+</tr>
+</tbody>
+</table>
+
+    
+  </div>
+  <footer class="end-sep">
+    
+      
+      
+    
+    <div class="clearfix"></div>
+  </footer>
+</article>
+
+
+  
+    <article class="post">
+  <header>
+    
+      <div class="icon"></div>
       <a href="/2015/10/16/Cocoapods/">
   <time datetime="2015-10-16T08:01:01.000Z">
     2015-10-16
