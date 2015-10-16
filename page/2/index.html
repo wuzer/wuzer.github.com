@@ -1,0 +1,217 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  
+  <title>悟者</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  
+    <meta name="author" content="wuzer">
+  
+  
+  <meta name="description">
+<meta property="og:type" content="website">
+<meta property="og:title" content="悟者">
+<meta property="og:url" content="http://yoursite.com/page/2/index.html">
+<meta property="og:site_name" content="悟者">
+<meta property="og:description">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="悟者">
+<meta name="twitter:description">
+  
+    <link rel="alternate" href="/atom.xml" title="悟者" type="application/atom+xml">
+  
+  
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+</head>
+
+<body>
+  <div class="wrapper">
+    <header id="header">
+  <div class="title">
+    <h1><a href="/">悟者</a></h1>
+    <p><a href="/">90后,摩羯座,iOS攻城师</a></p>
+  </div>
+  <nav class="nav">
+    <ul>
+      
+        <li><a href="/">Home</a></li>
+      
+        <li><a href="/archives">Archives</a></li>
+      
+      
+        <li><a href="/atom.xml">RSS</a></li>
+      
+    </ul>
+    <div class="clearfix"></div>
+  </nav>
+  <div class="clearfix"></div>
+</header>
+    <div class="content">
+
+
+
+
+  
+    <article class="post">
+  <header>
+    
+      <div class="icon"></div>
+      <a href="/2015/10/16/归档-解档/">
+  <time datetime="2015-10-16T07:43:22.000Z">
+    2015-10-16
+  </time>
+</a>
+    
+    
+  
+    <h1 class="title"><a href="/2015/10/16/归档-解档/">归档&amp;解档</a></h1>
+  
+
+  </header>
+  
+  <div class="entry">
+    
+      <ul>
+<li><code>归档 &amp; 解档</code>的概念与网络的<code>序列化&amp;反序列化</code>的概念非常像</li>
+<li>是 iOS 中在沙盒中保存自定义对象的一种手段</li>
+<li>要使用 <code>归档和解档</code> 需要：<ol>
+<li>在自定义对象中遵守 <code>NSCoding</code> 协议</li>
+<li>实现 <code>encodeWithCoder</code> 方法，将对象保存到磁盘之前，将对象转换成二进制数据</li>
+<li>实现 <code>initWithCoder</code> 方法，读取归档的二进制文件后，转换成自定义对象</li>
+<li>调用 <code>[NSKeyedArchiver archiveRootObject:p toFile:path];</code> 可以将自定义对象或数组归档保存至文件</li>
+<li>调用 <code>[NSKeyedUnarchiver unarchiveObjectWithFile:path];</code> 可以从归档保存的文件加载自定义对象或者数组</li>
+</ol>
+</li>
+</ul>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span><br><span class="line"> *  编码器：将对象保存到磁盘之前，将对象转换成二进制数据</span><br><span class="line"> *  概念：跟网络的序列化非常像</span><br><span class="line"> */</span></span><br><span class="line">- (<span class="keyword">void</span>)encodeWithCoder:(<span class="built_in">NSCoder</span> *)aCoder &#123;</span><br><span class="line">    [aCoder encodeObject:_name forKey:<span class="string">@"nameKey"</span>];</span><br><span class="line">    [aCoder encodeInt:_age forKey:<span class="string">@"ageKey"</span>];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span><br><span class="line"> *  解码器：读取归档的二进制文件后，转换成自定义对象</span><br><span class="line"> *</span><br><span class="line"> *  概念：网络的反序列化非常像</span><br><span class="line"> */</span></span><br><span class="line">- (<span class="keyword">id</span>)initWithCoder:(<span class="built_in">NSCoder</span> *)aDecoder &#123;</span><br><span class="line">    <span class="keyword">self</span> = [<span class="keyword">super</span> init];</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">self</span>) &#123;</span><br><span class="line">        <span class="comment">// key 一定要和归档的对应</span></span><br><span class="line">        _name = [aDecoder decodeObjectForKey:<span class="string">@"nameKey"</span>];</span><br><span class="line">        _age = [aDecoder decodeIntForKey:<span class="string">@"ageKey"</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">self</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>归档&amp;解档方法中的 key 一定要对应</p>
+</blockquote>
+
+    
+  </div>
+  <footer class="end-sep">
+    
+      
+      
+    
+    <div class="clearfix"></div>
+  </footer>
+</article>
+
+
+  
+    <article class="post">
+  <header>
+    
+      <div class="icon"></div>
+      <a href="/2015/09/25/关于XcodeGhost/">
+  <time datetime="2015-09-25T05:32:34.000Z">
+    2015-09-25
+  </time>
+</a>
+    
+    
+  
+    <h1 class="title"><a href="/2015/09/25/关于XcodeGhost/">关于XcodeGhost</a></h1>
+  
+
+  </header>
+  
+  <div class="entry">
+    
+      <h1 id="关于这次_Ghost_事件，我是也很虚的。因为众所周知的原因的，之前也在百度网盘下载的Xcode，而且正好是各种消息爆出来的那个网盘。还好检测了一下，没被染上。">关于这次 Ghost 事件，我是也很虚的。因为众所周知的原因的，之前也在百度网盘下载的Xcode，而且正好是各种消息爆出来的那个网盘。还好检测了一下，没被染上。</h1><h1 id="最近全部改成_AppStore_更新_Xcode_了。">最近全部改成 AppStore 更新 Xcode 了。</h1>
+    
+  </div>
+  <footer class="end-sep">
+    
+      
+      
+    
+    <div class="clearfix"></div>
+  </footer>
+</article>
+
+
+  
+    <article class="post">
+  <header>
+    
+      <div class="icon"></div>
+      <a href="/2015/09/14/Xcode7-0GM版遇到的小BUG/">
+  <time datetime="2015-09-14T13:44:48.000Z">
+    2015-09-14
+  </time>
+</a>
+    
+    
+  
+    <h1 class="title"><a href="/2015/09/14/Xcode7-0GM版遇到的小BUG/">Xcode7.0GM版遇到的小BUG</a></h1>
+  
+
+  </header>
+  
+  <div class="entry">
+    
+      <p>#####这两天苹果终于放出Xcode7的gm版,虽然不是正式版,但是比之前beta强太多了,立马就卸载了beta安装上了GM尝鲜.</p>
+<p>#####但是在使用过程中发现,新建的项目项目命如果用中文加数字组合就会报野指针错误.</p>
+
+    
+  </div>
+  <footer class="end-sep">
+    
+      
+      
+    
+    <div class="clearfix"></div>
+  </footer>
+</article>
+
+
+  
+
+  <nav id="pagination">
+  
+    <a href="/" class="prev">上一页</a>
+  
+  
+  <div class="clearfix"></div>
+</nav>
+
+</div>
+  </div>
+  <footer id="footer"><div class="copyright">
+  
+  &copy; 2015 <a href="/">wuzer</a>
+  
+</div>
+<div class="theme-copyright">
+  Theme by <a href="https://github.com/orderedlist" target="_blank">orderedlist</a>
+   | 
+  Redesign by <a href="http://heroicyang.com/" target="_blank">Heroic Yang</a>
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+<script src="/js/scale.fix.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+  (function($){
+    $('.fancybox').fancybox();
+  })(jQuery);
+</script>
+
+</body>
+</html>

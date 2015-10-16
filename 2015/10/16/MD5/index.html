@@ -1,0 +1,234 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  
+  <title>MD5 | 悟者</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  
+    <meta name="author" content="wuzer">
+  
+  
+    <meta name="description" content="约定
+同样的密码，同样的加密算法，每次加密的结果是不一样
+
+密码方案
+方案一：直接 MD5
+
+1pwd = pwd.md5String;
+
+非常不安全
+
+
+方案二 MD5 + 盐
+
+1pwd = [pwd stringByAppendingString:salt].md5String;
+
+盐值要够咸，可以从服务器获取
+
+
+安全方案三 - HMAC
+
+1pwd = [pwd hmacMD5Strin">
+  
+  <meta name="description" content="约定
+同样的密码，同样的加密算法，每次加密的结果是不一样
+
+密码方案
+方案一：直接 MD5
+
+1pwd = pwd.md5String;
+
+非常不安全
+
+
+方案二 MD5 + 盐
+
+1pwd = [pwd stringByAppendingString:salt].md5String;
+
+盐值要够咸，可以从服务器获取
+
+
+安全方案三 - HMAC
+
+1pwd = [pwd hmacMD5Strin">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MD5">
+<meta property="og:url" content="http://yoursite.com/2015/10/16/MD5/index.html">
+<meta property="og:site_name" content="悟者">
+<meta property="og:description" content="约定
+同样的密码，同样的加密算法，每次加密的结果是不一样
+
+密码方案
+方案一：直接 MD5
+
+1pwd = pwd.md5String;
+
+非常不安全
+
+
+方案二 MD5 + 盐
+
+1pwd = [pwd stringByAppendingString:salt].md5String;
+
+盐值要够咸，可以从服务器获取
+
+
+安全方案三 - HMAC
+
+1pwd = [pwd hmacMD5Strin">
+<meta property="og:updated_time" content="2015-10-16T08:20:53.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="MD5">
+<meta name="twitter:description" content="约定
+同样的密码，同样的加密算法，每次加密的结果是不一样
+
+密码方案
+方案一：直接 MD5
+
+1pwd = pwd.md5String;
+
+非常不安全
+
+
+方案二 MD5 + 盐
+
+1pwd = [pwd stringByAppendingString:salt].md5String;
+
+盐值要够咸，可以从服务器获取
+
+
+安全方案三 - HMAC
+
+1pwd = [pwd hmacMD5Strin">
+  
+    <link rel="alternate" href="/atom.xml" title="悟者" type="application/atom+xml">
+  
+  
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+</head>
+
+<body>
+  <div class="wrapper">
+    <header id="header">
+  <div class="title">
+    <h1><a href="/">悟者</a></h1>
+    <p><a href="/">90后,摩羯座,iOS攻城师</a></p>
+  </div>
+  <nav class="nav">
+    <ul>
+      
+        <li><a href="/">Home</a></li>
+      
+        <li><a href="/archives">Archives</a></li>
+      
+      
+        <li><a href="/atom.xml">RSS</a></li>
+      
+    </ul>
+    <div class="clearfix"></div>
+  </nav>
+  <div class="clearfix"></div>
+</header>
+    <div class="content"><article class="post">
+  <header>
+    
+      <div class="icon"></div>
+      <a href="/2015/10/16/MD5/">
+  <time datetime="2015-10-16T08:20:34.000Z">
+    2015-10-16
+  </time>
+</a>
+    
+    
+  
+    <h1 class="title">MD5</h1>
+  
+
+  </header>
+  
+  <div class="entry">
+    
+      <h2 id="约定">约定</h2><ul>
+<li>同样的密码，同样的加密算法，每次加密的结果是不一样</li>
+</ul>
+<h2 id="密码方案">密码方案</h2><ul>
+<li>方案一：直接 MD5</li>
+</ul>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pwd = pwd<span class="variable">.md5String</span>;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>非常不安全</p>
+</blockquote>
+<ul>
+<li>方案二 MD5 + 盐</li>
+</ul>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pwd = [pwd stringByAppendingString:salt]<span class="variable">.md5String</span>;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>盐值要够<code>咸</code>，可以从服务器获取</p>
+</blockquote>
+<ul>
+<li>安全方案三 - HMAC</li>
+</ul>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pwd = [pwd hmacMD5StringWithKey:<span class="string">@"itheima"</span>];</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>相对之前的方案，安全级别要高很多，使用 <code>itheima</code> 对 pwd 进行<code>加密</code>，然后在进行 md5，然后再次加密，再次 md5</p>
+</blockquote>
+<ul>
+<li>安全方案四 - 时间戳密码</li>
+</ul>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="built_in">NSString</span> *)timePassword &#123;</span><br><span class="line">    <span class="comment">// 1. 生成key</span></span><br><span class="line">    <span class="built_in">NSString</span> *key = <span class="string">@"itheima"</span><span class="variable">.md5String</span>;</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"HMAC Key - %@"</span>, key);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 2. 对密码进行 hmac 加密</span></span><br><span class="line">    <span class="built_in">NSString</span> *pwd = [<span class="keyword">self</span><span class="variable">.pwd</span> hmacMD5StringWithKey:key];</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 3. 获取当前系统时间</span></span><br><span class="line">    <span class="built_in">NSDateFormatter</span> *fmt = [[<span class="built_in">NSDateFormatter</span> alloc] init];</span><br><span class="line">    fmt<span class="variable">.locale</span> = [<span class="built_in">NSLocale</span> localeWithLocaleIdentifier:<span class="string">@"zh"</span>];</span><br><span class="line">    fmt<span class="variable">.dateFormat</span> = <span class="string">@"yyyy-MM-dd HH:mm"</span>;</span><br><span class="line">    <span class="built_in">NSString</span> *dateStr = [fmt stringFromDate:[<span class="built_in">NSDate</span> date]];</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"%@"</span>, dateStr);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 4. 将系统时间拼接在第一次加密密码的末尾</span></span><br><span class="line">    pwd = [pwd stringByAppendingString:dateStr];</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 5. 返回拼接结果的再次 hmac</span></span><br><span class="line">    <span class="keyword">return</span> [pwd hmacMD5StringWithKey:key];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>密码时效大约两分钟，需要服务器脚本支持，安全级别高，不过客户端的时间与服务器的时间不同步</p>
+</blockquote>
+<ul>
+<li>安全方案五 - 服务器时间戳密码</li>
+</ul>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/// 生成时间戳密码</span></span><br><span class="line">- (<span class="built_in">NSString</span> *)timePassword:(<span class="built_in">NSString</span> *)pwd &#123;</span><br><span class="line">    <span class="comment">// 1. 以 itheima.md5 作为 hmac key</span></span><br><span class="line">    <span class="built_in">NSString</span> *key = <span class="string">@"itheima"</span><span class="variable">.md5String</span>;</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"HMAC KEY - %@"</span>, key);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 2. 对密码进行 hamc</span></span><br><span class="line">    <span class="built_in">NSString</span> *pwd = [<span class="keyword">self</span><span class="variable">.pwd</span> hmacMD5StringWithKey:key];</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 3. 取服务器时间</span></span><br><span class="line">    <span class="built_in">NSData</span> *data = [<span class="built_in">NSData</span> dataWithContentsOfURL:[<span class="built_in">NSURL</span> URLWithString:<span class="string">@"http://localhost/hmackey.php"</span>]];</span><br><span class="line">    <span class="built_in">NSDictionary</span> *dict = [<span class="built_in">NSJSONSerialization</span> JSONObjectWithData:data options:<span class="number">0</span> error:<span class="literal">NULL</span>];</span><br><span class="line">    <span class="built_in">NSString</span> *dateStr = dict[<span class="string">@"key"</span>];</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 4. 拼接时间字符串</span></span><br><span class="line">    pwd = [pwd stringByAppendingString:dateStr];</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 5. 再次 hmac 散列密码</span></span><br><span class="line">    <span class="keyword">return</span> [pwd hmacMD5StringWithKey:key];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+    
+  </div>
+  <footer>
+    
+      
+      
+    
+    <div class="clearfix"></div>
+  </footer>
+</article>
+
+</div>
+  </div>
+  <footer id="footer"><div class="copyright">
+  
+  &copy; 2015 <a href="/">wuzer</a>
+  
+</div>
+<div class="theme-copyright">
+  Theme by <a href="https://github.com/orderedlist" target="_blank">orderedlist</a>
+   | 
+  Redesign by <a href="http://heroicyang.com/" target="_blank">Heroic Yang</a>
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+<script src="/js/scale.fix.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+  (function($){
+    $('.fancybox').fancybox();
+  })(jQuery);
+</script>
+
+</body>
+</html>

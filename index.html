@@ -62,6 +62,509 @@
   <header>
     
       <div class="icon"></div>
+      <a href="/2015/10/16/非对称加密算法/">
+  <time datetime="2015-10-16T08:23:27.000Z">
+    2015-10-16
+  </time>
+</a>
+    
+    
+  
+    <h1 class="title"><a href="/2015/10/16/非对称加密算法/">非对称加密算法</a></h1>
+  
+
+  </header>
+  
+  <div class="entry">
+    
+      <h2 id="介绍">介绍</h2><ul>
+<li>非对称加密算法需要两个密钥：<code>公开密钥（publickey）</code> 和 <code>私有密钥（privatekey）</code></li>
+<li>公开密钥与私有密钥是一对，如果用公开密钥对数据进行加密，只有用对应的私有密钥才能解密；如果用私有密钥对数据进行加密，那么只有用对应的公开密钥才能解密</li>
+</ul>
+<h2 id="特点">特点</h2><ul>
+<li>算法强度复杂、安全性依赖于算法与密钥</li>
+<li>加密解密速度慢</li>
+</ul>
+<h2 id="与对称加密算法的对比">与对称加密算法的对比</h2><ul>
+<li>对称加密只有一种密钥，并且是非公开的，如果要解密就得让对方知道密钥</li>
+<li>非对称密钥体制有两种密钥，其中一个是公开的</li>
+</ul>
+<h2 id="RSA_算法原理">RSA 算法原理</h2><ol>
+<li>找出两个“很大”的质数：P &amp; Q<ul>
+<li>N = P * Q</li>
+<li>M = (P – 1) * (Q – 1)</li>
+</ul>
+</li>
+<li>找出整数E，E与M互质，即除了1之外，没有其他公约数</li>
+<li>找出整数D，使得 E<em>D 除以 M 余 1，即 (E </em> D) % M = 1</li>
+<li>经过上述准备工作之后，可以得到：<ul>
+<li>E是公钥，负责加密</li>
+<li>D是私钥，负责解密</li>
+<li>N负责公钥和私钥之间的联系</li>
+</ul>
+</li>
+<li>加密算法，假定对X进行加密<ul>
+<li>(X ^ E) % N = Y</li>
+</ul>
+</li>
+<li>解密算法，根据费尔马小定义，可以使用以下公式完成解密<ul>
+<li>(Y ^ D) % N = X</li>
+</ul>
+</li>
+</ol>
+<h2 id="代码演练">代码演练</h2><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">CryptorTools *tools = [[CryptorTools alloc] init];</span><br><span class="line"></span><br><span class="line"><span class="comment">// 1. 加载公钥</span></span><br><span class="line"><span class="built_in">NSString</span> *pubPath = [[<span class="built_in">NSBundle</span> mainBundle] pathForResource:<span class="string">@"rsacert.der"</span> ofType:<span class="literal">nil</span>];</span><br><span class="line">[tools loadPublicKeyWithFilePath:pubPath];</span><br><span class="line"></span><br><span class="line"><span class="comment">// 2. 使用公钥加密，加密内容最大长度 117</span></span><br><span class="line"><span class="built_in">NSString</span> *result = [tools RSAEncryptString:<span class="string">@"abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghi"</span>];</span><br><span class="line"><span class="built_in">NSLog</span>(<span class="string">@"RSA 加密 %@"</span>, result);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 3. 加载私钥，并指定导出 p12 时设置的密码</span></span><br><span class="line"><span class="built_in">NSString</span> *privatePath = [[<span class="built_in">NSBundle</span> mainBundle] pathForResource:<span class="string">@"p.p12"</span> ofType:<span class="literal">nil</span>];</span><br><span class="line">[tools loadPrivateKey:privatePath password:<span class="string">@"123"</span>];</span><br><span class="line"></span><br><span class="line"><span class="comment">// 4. 使用私钥解密</span></span><br><span class="line"><span class="built_in">NSLog</span>(<span class="string">@"解密结果 %@"</span>, [tools RSADecryptString:result]);</span><br></pre></td></tr></table></figure>
+<h3 id="iOS_相关函数">iOS 相关函数</h3><table>
+<thead>
+<tr>
+<th>函数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SecKeyEncrypt</td>
+<td>使用公钥对数据加密</td>
+</tr>
+<tr>
+<td>SecKeyDecrypt</td>
+<td>使用私钥对数据解密</td>
+</tr>
+<tr>
+<td>SecKeyRawVerify</td>
+<td>使用公钥对数字签名进行验证</td>
+</tr>
+<tr>
+<td>SecKeyRawSign</td>
+<td>使用私钥生成数字签名</td>
+</tr>
+</tbody>
+</table>
+<h2 id="应用场景">应用场景</h2><p>由于 <code>RSA</code> 算法的加密解密速度要比对称算法的速度慢很多，在实际应用中，通常采取：</p>
+<ul>
+<li>数据本身的加密解密使用对称加密算法(AES)</li>
+<li>用 <code>RSA</code> 算法加密并传输对称算法所需的密钥</li>
+</ul>
+<h2 id="OpenSSL_终端测试命令">OpenSSL 终端测试命令</h2><h3 id="程序开发证书生成">程序开发证书生成</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 生成私钥</span></span><br><span class="line">$ openssl genrsa -out private.pem <span class="number">1024</span></span><br><span class="line"><span class="comment"># 创建证书请求</span></span><br><span class="line">$ openssl req -new -key private.pem -out rsacert.csr</span><br><span class="line"><span class="comment"># 生成证书并签名，有效期10年</span></span><br><span class="line">$ openssl x509 -req -days <span class="number">3650</span> -in rsacert.csr -signkey private.pem -out rsacert.crt</span><br><span class="line"><span class="comment"># 转换格式-将 PEM 格式文件转换成 DER 格式</span></span><br><span class="line">$ openssl x509 -outform der -in rsacert.crt -out rsacert.der</span><br><span class="line"><span class="comment"># 导出P12文件</span></span><br><span class="line">$ openssl pkcs12 -export -out p.p12 -inkey private.pem -in rsacert.crt</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>在苹果开发中，不能直接使用 PEM 格式的证书</p>
+</blockquote>
+<ul>
+<li><code>DER</code> 文件是 <code>CRT</code> 文件的 <code>BASE 64</code> 解码前的二进制数据文件</li>
+<li><code>OpenSSL</code> 默认生成的都是 <code>PEM</code> 格式的证书（BASE64 编码后的文本文件）</li>
+</ul>
+<h3 id="数字签名">数字签名</h3><ul>
+<li>发送方<ul>
+<li><code>报文</code> HASH 得到 <code>报文摘要</code></li>
+<li><code>报文摘要</code> 用公钥加密(数字签名) + 报文</li>
+<li>发送给接收方</li>
+</ul>
+</li>
+<li>接收方<ul>
+<li><code>报文</code> HASH 得到 <code>报文摘要</code></li>
+<li><code>数字签名</code> 用私钥解密 判断是否与 <code>报文摘要</code> 相同</li>
+</ul>
+</li>
+</ul>
+<h3 id="OpenSSL_生成密钥演练">OpenSSL 生成密钥演练</h3><h4 id="私钥_&amp;_公钥">私钥 &amp; 公钥</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 生成强度是 512 的 RSA 私钥</span></span><br><span class="line">$ openssl genrsa -out private.pem <span class="number">512</span></span><br><span class="line"><span class="comment"># 以明文输出私钥内容</span></span><br><span class="line">$ openssl rsa -in private.pem -text -out private.txt</span><br><span class="line"><span class="comment"># 校验私钥文件</span></span><br><span class="line">$ openssl rsa -in private.pem -check</span><br><span class="line"><span class="comment"># 从私钥中提取公钥</span></span><br><span class="line">$ openssl rsa -in private.pem -out public.pem -outform PEM -pubout</span><br><span class="line"><span class="comment"># 以明文输出公钥内容</span></span><br><span class="line">$ openssl rsa -in public.pem -out public.txt -pubin -pubout -text</span><br></pre></td></tr></table></figure>
+<h4 id="加密_&amp;_解密">加密 &amp; 解密</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 使用公钥加密小文件</span></span><br><span class="line">$ openssl rsautl -encrypt -pubin -inkey public.pem -in msg.txt -out msg.bin</span><br><span class="line"><span class="comment"># 使用私钥解密小文件</span></span><br><span class="line">$ openssl rsautl -decrypt -inkey private.pem -in msg.bin -out a.txt</span><br></pre></td></tr></table></figure>
+<h4 id="格式转换">格式转换</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 将私钥转换成 DER 格式</span></span><br><span class="line">$ openssl rsa -in private.pem -out private.der -outform der</span><br><span class="line"><span class="comment"># 将公钥转换成 DER 格式</span></span><br><span class="line">$ openssl rsa -in public.pem -out public.der -pubin -outform der</span><br></pre></td></tr></table></figure>
+<h3 id="PKCS">PKCS</h3><ul>
+<li>Public-Key Cryptography Standards (PKCS)是由美国 RSA 数据安全公司及其合作伙伴制定的一组公钥密码学标准，其中包括证书申请、证书更新、证书作废表发布、扩展证书内容以及数字签名、数字信封的格式等方面的一系列相关协议</li>
+</ul>
+<h4 id="PKCS协议">PKCS协议</h4><table>
+<thead>
+<tr>
+<th>协议</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>PKCS#1</td>
+<td>定义 RSA 公开密钥算法加密和签名机制，主要用于组织 PKCS#7 中所描述的数字签名和数字信封（专门用来加密/解密）</td>
+</tr>
+<tr>
+<td>PKCS#8</td>
+<td>描述私有密钥信息格式，该信息包括公开密钥算法的私有密钥以及可选的属性集等（JAVA使用）</td>
+</tr>
+<tr>
+<td>PKCS#12</td>
+<td>描述个人信息交换语法标准。描述了将用户公钥、私钥、证书和其他相关信息打包的语法（苹果使用）</td>
+</tr>
+</tbody>
+</table>
+
+    
+  </div>
+  <footer class="end-sep">
+    
+      
+      
+    
+    <div class="clearfix"></div>
+  </footer>
+</article>
+
+
+  
+    <article class="post">
+  <header>
+    
+      <div class="icon"></div>
+      <a href="/2015/10/16/对称加密算法/">
+  <time datetime="2015-10-16T08:22:03.000Z">
+    2015-10-16
+  </time>
+</a>
+    
+    
+  
+    <h1 class="title"><a href="/2015/10/16/对称加密算法/">对称加密算法</a></h1>
+  
+
+  </header>
+  
+  <div class="entry">
+    
+      <h1 id="对称加密算法">对称加密算法</h1><blockquote>
+<p>提示：加密内容属于高级程序员的话题！有些内容会很枯燥！注意掌握加密的思路和操作步骤即可！代码不要求会写，只要会用就行！</p>
+</blockquote>
+<ul>
+<li>又称传统加密算法</li>
+<li>加密和解密使用同一个<code>密钥</code></li>
+</ul>
+<h2 id="对称加密算法示例">对称加密算法示例</h2><ul>
+<li>密钥：X</li>
+<li>加密算法：每个字符+X</li>
+<li>明文：<code>Hello</code></li>
+<li>密钥为 <code>1</code> 时加密结果：<code>Ifmmp</code></li>
+<li>密钥为 <code>2</code> 时加密结果：<code>Jgnnq</code></li>
+</ul>
+<h2 id="优缺点">优缺点</h2><ul>
+<li>优点<ul>
+<li>算法公开、计算量小、加密速度快、加密效率高</li>
+</ul>
+</li>
+<li>缺点<ul>
+<li>双方使用相同钥匙，安全性得不到保证</li>
+</ul>
+</li>
+</ul>
+<h2 id="注意事项">注意事项</h2><ul>
+<li>密钥的保密工作非常重要</li>
+<li>密钥要求定期更换</li>
+</ul>
+<h2 id="经典算法">经典算法</h2><table>
+<thead>
+<tr>
+<th>算法</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DES</td>
+<td>数据加密标准（用的少，因为强度不够）</td>
+</tr>
+<tr>
+<td>3DES</td>
+<td>使用3个密钥，对相同的数据执行三次加密，强度增强</td>
+</tr>
+<tr>
+<td>AES</td>
+<td>高级加密标准，目前美国国家安全局使用的<br>苹果的钥匙串访问采用的是 AES 加密</td>
+</tr>
+</tbody>
+</table>
+<h2 id="ECB_&amp;_CBC">ECB &amp; CBC</h2><ul>
+<li>ECB ：电子代码本，就是说每个块都是独立加密的</li>
+<li>CBC ：密码块链，使用一个密钥和一个初始化向量 (IV)对数据执行加密转换</li>
+</ul>
+<h3 id="OpenSSL_终端测试命令">OpenSSL 终端测试命令</h3><h4 id="ECB">ECB</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 加密</span></span><br><span class="line">$ openssl enc -des-ecb -K <span class="number">616263</span> -nosalt -in msg1.txt -out msg1.bin</span><br><span class="line"><span class="comment"># 解密</span></span><br><span class="line">$ openssl enc -des-ecb -K <span class="number">616263</span> -nosalt -in msg1.bin -out msg1.txt <span class="operator">-d</span></span><br><span class="line"><span class="comment"># 查看加密之后的二进制文件</span></span><br><span class="line">$ xxd msg1.bin</span><br></pre></td></tr></table></figure>
+<h4 id="CBC">CBC</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 加密</span></span><br><span class="line">$ openssl enc -des-cbc -K <span class="number">616263</span> -iv <span class="number">0000000000000000</span> -nosalt -in a.txt -out msg1.bin</span><br><span class="line"><span class="comment"># 解密</span></span><br><span class="line">$ openssl enc -des-cbc -K <span class="number">616263</span> -iv <span class="number">0000000000000000</span> -nosalt -in msg1.bin -out msg4.txt <span class="operator">-d</span></span><br><span class="line"><span class="comment"># 查看加密之后的二进制文件</span></span><br><span class="line">$ xxd msg1.bin</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>CBC加密可以有效地保证密文的完整性，也就是说如果有一个块在传送时丢失了（或被敌人改变了），就会导致后面所有的块无法正常解密这个特性可以用来防范一些窃听技巧</p>
+</blockquote>
+<h2 id="代码演练">代码演练</h2><ul>
+<li>AES</li>
+</ul>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">NSString</span> *key = <span class="string">@"abc"</span>;</span><br><span class="line"><span class="comment">// ECB 加密&amp;解密</span></span><br><span class="line"><span class="built_in">NSString</span> *str1 = [CryptorTools AESEncryptString:<span class="string">@"hello"</span> keyString:key iv:<span class="literal">nil</span>];</span><br><span class="line"><span class="built_in">NSLog</span>(<span class="string">@"AES ECB 加密 %@"</span>, str1);</span><br><span class="line"><span class="built_in">NSLog</span>(<span class="string">@"AES ECB 解密 %@"</span>, [CryptorTools AESDecryptString:str1 keyString:key iv:<span class="literal">nil</span>]);</span><br><span class="line"></span><br><span class="line"><span class="comment">// CBC 加密&amp;解密</span></span><br><span class="line">uint8_t iv[<span class="number">8</span>] = &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>&#125;;</span><br><span class="line"><span class="built_in">NSData</span> *ivData = [<span class="built_in">NSData</span> dataWithBytes:iv length:<span class="keyword">sizeof</span>(iv)];</span><br><span class="line"><span class="built_in">NSString</span> *str2 = [CryptorTools AESEncryptString:<span class="string">@"hello"</span> keyString:key iv:ivData];</span><br><span class="line"><span class="built_in">NSLog</span>(<span class="string">@"AES CBC 加密 %@"</span>, str2);</span><br><span class="line"><span class="built_in">NSLog</span>(<span class="string">@"AES CBC 解密 %@"</span>, [CryptorTools AESDecryptString:str2 keyString:key iv:ivData]);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>DES</li>
+</ul>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">NSString</span> *key = <span class="string">@"abc"</span>;</span><br><span class="line"><span class="comment">// ECB 加密&amp;解密</span></span><br><span class="line"><span class="built_in">NSString</span> *str1 = [CryptorTools DESEncryptString:<span class="string">@"hello"</span> keyString:key iv:<span class="literal">nil</span>];</span><br><span class="line"><span class="built_in">NSLog</span>(<span class="string">@"DES ECB 加密 %@"</span>, str1);</span><br><span class="line"><span class="built_in">NSLog</span>(<span class="string">@"DES ECB 解密 %@"</span>, [CryptorTools DESDecryptString:str1 keyString:key iv:<span class="literal">nil</span>]);</span><br><span class="line"></span><br><span class="line"><span class="comment">// CBC 加密&amp;解密</span></span><br><span class="line">uint8_t iv[<span class="number">8</span>] = &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>&#125;;</span><br><span class="line"><span class="built_in">NSData</span> *ivData = [<span class="built_in">NSData</span> dataWithBytes:iv length:<span class="keyword">sizeof</span>(iv)];</span><br><span class="line"><span class="built_in">NSString</span> *str2 = [CryptorTools DESEncryptString:<span class="string">@"hello"</span> keyString:key iv:ivData];</span><br><span class="line"><span class="built_in">NSLog</span>(<span class="string">@"DES CBC 加密 %@"</span>, str2);</span><br><span class="line"><span class="built_in">NSLog</span>(<span class="string">@"DES CBC 解密 %@"</span>, [CryptorTools DESDecryptString:str2 keyString:key iv:ivData]);</span><br></pre></td></tr></table></figure>
+<h2 id="OpenSSL_终端测试命令-1">OpenSSL 终端测试命令</h2><h3 id="ECB_加密/解密">ECB 加密/解密</h3><ul>
+<li>AES</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># AES(ECB)加密</span></span><br><span class="line">$ <span class="built_in">echo</span> -n <span class="string">"hello"</span> | openssl enc -aes-<span class="number">128</span>-ecb -K <span class="number">616263</span> -nosalt | base64</span><br><span class="line"></span><br><span class="line"><span class="comment"># AES(ECB)解密</span></span><br><span class="line">$ <span class="built_in">echo</span> -n <span class="string">"d1QG4T2tivoi0Kiu3NEmZQ=="</span> | base64 -D | openssl enc -aes-<span class="number">128</span>-ecb -K <span class="number">616263</span> -nosalt <span class="operator">-d</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>DES</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># DES(ECB)加密</span></span><br><span class="line">$ <span class="built_in">echo</span> -n <span class="string">"hello"</span> | openssl enc -des-ecb -K <span class="number">616263</span> -nosalt | base64</span><br><span class="line"></span><br><span class="line"><span class="comment"># DES(ECB)解密</span></span><br><span class="line">$ <span class="built_in">echo</span> -n <span class="string">"HQr0Oij2kbo="</span> | base64 -D | openssl enc -des-ecb -K <span class="number">616263</span> -nosalt <span class="operator">-d</span></span><br></pre></td></tr></table></figure>
+<h3 id="CBC_加密/解密">CBC 加密/解密</h3><ul>
+<li>AES</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># AES(CBC)加密</span></span><br><span class="line">$ <span class="built_in">echo</span> -n <span class="string">"hello"</span> | openssl enc -aes-<span class="number">128</span>-cbc -iv <span class="number">0102030405060708</span> -K <span class="number">616263</span> -nosalt | base64</span><br><span class="line"></span><br><span class="line">AES(CBC)解密</span><br><span class="line">$ <span class="built_in">echo</span> -n <span class="string">"u3W/N816uzFpcg6pZ+kbdg=="</span> | base64 -D | openssl enc -aes-<span class="number">128</span>-cbc -iv <span class="number">0102030405060708</span> -K <span class="number">616263</span> -nosalt <span class="operator">-d</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>DES</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># DES(CBC)加密</span></span><br><span class="line">$ <span class="built_in">echo</span> -n <span class="string">"hello"</span> | openssl enc -des-cbc -K <span class="number">616263</span> -nosalt -iv <span class="number">0102030405060708</span> | base64</span><br><span class="line"></span><br><span class="line"><span class="comment"># DES(CBC)解密</span></span><br><span class="line">$ <span class="built_in">echo</span> -n <span class="string">"alvrvb3Gz88="</span> | base64 -D | openssl enc -des-cbc -K <span class="number">616263</span> -nosalt -iv <span class="number">0102030405060708</span> <span class="operator">-d</span></span><br></pre></td></tr></table></figure>
+<p>终端命令说明</p>
+<ul>
+<li>加密过程是先加密，再base64编码</li>
+<li>解密过程是先base64解码，再解密</li>
+<li><code>|</code> 是终端管道命令，会将前一个命令结果传递给后一个命令</li>
+<li><code>-K</code> 使用的密钥需要是密钥的 ASCII 码</li>
+</ul>
+
+    
+  </div>
+  <footer class="end-sep">
+    
+      
+      
+    
+    <div class="clearfix"></div>
+  </footer>
+</article>
+
+
+  
+    <article class="post">
+  <header>
+    
+      <div class="icon"></div>
+      <a href="/2015/10/16/钥匙串/">
+  <time datetime="2015-10-16T08:21:17.000Z">
+    2015-10-16
+  </time>
+</a>
+    
+    
+  
+    <h1 class="title"><a href="/2015/10/16/钥匙串/">钥匙串</a></h1>
+  
+
+  </header>
+  
+  <div class="entry">
+    
+      <h1 id="钥匙串">钥匙串</h1><ul>
+<li>苹果的”生态圈”，钥匙串访问，使用 AES 256 加密算法，能够保证用户密码的安全</li>
+<li>钥匙串访问SDK，是苹果在 <code>iOS 7.0.3</code> 版本以后公布的</li>
+<li>钥匙串访问的接口是纯 C 语言的，但是，网络上有一个哥们把它封装成 OC 的，使用相当简单！</li>
+<li>钥匙串访问的密码保存在哪里？<ul>
+<li>只有苹果知道！是为了进一步保障用户的密码安全！</li>
+</ul>
+</li>
+<li>钥匙串访问的第三方框架，是对 C 框架的封装，可以不用看源代码</li>
+</ul>
+<h2 id="框架地址">框架地址</h2><p><a href="https://github.com/soffes/sskeychain" target="_blank" rel="external">https://github.com/soffes/sskeychain</a></p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/// 所有账户</span></span><br><span class="line">+ (<span class="built_in">NSArray</span> *)allAccounts;</span><br><span class="line"><span class="comment">/// 获取所有账户信息</span></span><br><span class="line">+ (<span class="built_in">NSArray</span> *)accountsForService:(<span class="built_in">NSString</span> *)serviceName;</span><br><span class="line"><span class="comment">/// 获取账号密码</span></span><br><span class="line">+ (<span class="built_in">NSString</span> *)passwordForService:(<span class="built_in">NSString</span> *)serviceName account:(<span class="built_in">NSString</span> *)account;</span><br><span class="line"><span class="comment">/// 删除账号密码</span></span><br><span class="line">+ (<span class="built_in">BOOL</span>)deletePasswordForService:(<span class="built_in">NSString</span> *)serviceName account:(<span class="built_in">NSString</span> *)account;</span><br><span class="line"><span class="comment">/// 将账号密码保存在钥匙串</span></span><br><span class="line">+ (<span class="built_in">BOOL</span>)setPassword:(<span class="built_in">NSString</span> *)password forService:(<span class="built_in">NSString</span> *)serviceName account:(<span class="built_in">NSString</span> *)account;</span><br></pre></td></tr></table></figure>
+<h2 id="保存钥匙串">保存钥匙串</h2><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">///  保存用户信息</span></span><br><span class="line">- (<span class="keyword">void</span>)saveUserInfo &#123;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">NSUserDefaults</span> *defaults = [<span class="built_in">NSUserDefaults</span> standardUserDefaults];</span><br><span class="line"></span><br><span class="line">    <span class="comment">// iOS 8.0 会直接写入沙盒，无需再使用 `[defaults synchronize];`</span></span><br><span class="line">    [defaults setObject:<span class="keyword">self</span><span class="variable">.username</span> forKey:HMUsernameKey];</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 将用户密码保存在钥匙串</span></span><br><span class="line">    <span class="built_in">NSString</span> *bundleId = [<span class="built_in">NSBundle</span> mainBundle]<span class="variable">.bundleIdentifier</span>;</span><br><span class="line">    [SSKeychain setPassword:<span class="keyword">self</span><span class="variable">.pwd</span> forService:bundleId account:<span class="keyword">self</span><span class="variable">.username</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="从钥匙串加载密码">从钥匙串加载密码</h2><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">///  加载用户下信息</span></span><br><span class="line">- (<span class="keyword">void</span>)loadUserInfo &#123;</span><br><span class="line">    <span class="built_in">NSUserDefaults</span> *defaults = [<span class="built_in">NSUserDefaults</span> standardUserDefaults];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">self</span><span class="variable">.usernameText</span><span class="variable">.text</span> = [defaults stringForKey:HMUsernameKey];</span><br><span class="line"></span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"%@"</span>, [SSKeychain allAccounts]);</span><br><span class="line">    <span class="built_in">NSString</span> *bundleId = [<span class="built_in">NSBundle</span> mainBundle]<span class="variable">.bundleIdentifier</span>;</span><br><span class="line">    <span class="keyword">self</span><span class="variable">.pwdText</span><span class="variable">.text</span> = [SSKeychain passwordForService:bundleId account:<span class="keyword">self</span><span class="variable">.usernameText</span><span class="variable">.text</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+    
+  </div>
+  <footer class="end-sep">
+    
+      
+      
+    
+    <div class="clearfix"></div>
+  </footer>
+</article>
+
+
+  
+    <article class="post">
+  <header>
+    
+      <div class="icon"></div>
+      <a href="/2015/10/16/MD5/">
+  <time datetime="2015-10-16T08:20:34.000Z">
+    2015-10-16
+  </time>
+</a>
+    
+    
+  
+    <h1 class="title"><a href="/2015/10/16/MD5/">MD5</a></h1>
+  
+
+  </header>
+  
+  <div class="entry">
+    
+      <h2 id="约定">约定</h2><ul>
+<li>同样的密码，同样的加密算法，每次加密的结果是不一样</li>
+</ul>
+<h2 id="密码方案">密码方案</h2><ul>
+<li>方案一：直接 MD5</li>
+</ul>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pwd = pwd<span class="variable">.md5String</span>;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>非常不安全</p>
+</blockquote>
+<ul>
+<li>方案二 MD5 + 盐</li>
+</ul>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pwd = [pwd stringByAppendingString:salt]<span class="variable">.md5String</span>;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>盐值要够<code>咸</code>，可以从服务器获取</p>
+</blockquote>
+<ul>
+<li>安全方案三 - HMAC</li>
+</ul>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pwd = [pwd hmacMD5StringWithKey:<span class="string">@"itheima"</span>];</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>相对之前的方案，安全级别要高很多，使用 <code>itheima</code> 对 pwd 进行<code>加密</code>，然后在进行 md5，然后再次加密，再次 md5</p>
+</blockquote>
+<ul>
+<li>安全方案四 - 时间戳密码</li>
+</ul>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="built_in">NSString</span> *)timePassword &#123;</span><br><span class="line">    <span class="comment">// 1. 生成key</span></span><br><span class="line">    <span class="built_in">NSString</span> *key = <span class="string">@"itheima"</span><span class="variable">.md5String</span>;</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"HMAC Key - %@"</span>, key);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 2. 对密码进行 hmac 加密</span></span><br><span class="line">    <span class="built_in">NSString</span> *pwd = [<span class="keyword">self</span><span class="variable">.pwd</span> hmacMD5StringWithKey:key];</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 3. 获取当前系统时间</span></span><br><span class="line">    <span class="built_in">NSDateFormatter</span> *fmt = [[<span class="built_in">NSDateFormatter</span> alloc] init];</span><br><span class="line">    fmt<span class="variable">.locale</span> = [<span class="built_in">NSLocale</span> localeWithLocaleIdentifier:<span class="string">@"zh"</span>];</span><br><span class="line">    fmt<span class="variable">.dateFormat</span> = <span class="string">@"yyyy-MM-dd HH:mm"</span>;</span><br><span class="line">    <span class="built_in">NSString</span> *dateStr = [fmt stringFromDate:[<span class="built_in">NSDate</span> date]];</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"%@"</span>, dateStr);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 4. 将系统时间拼接在第一次加密密码的末尾</span></span><br><span class="line">    pwd = [pwd stringByAppendingString:dateStr];</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 5. 返回拼接结果的再次 hmac</span></span><br><span class="line">    <span class="keyword">return</span> [pwd hmacMD5StringWithKey:key];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>密码时效大约两分钟，需要服务器脚本支持，安全级别高，不过客户端的时间与服务器的时间不同步</p>
+</blockquote>
+<ul>
+<li>安全方案五 - 服务器时间戳密码</li>
+</ul>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/// 生成时间戳密码</span></span><br><span class="line">- (<span class="built_in">NSString</span> *)timePassword:(<span class="built_in">NSString</span> *)pwd &#123;</span><br><span class="line">    <span class="comment">// 1. 以 itheima.md5 作为 hmac key</span></span><br><span class="line">    <span class="built_in">NSString</span> *key = <span class="string">@"itheima"</span><span class="variable">.md5String</span>;</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"HMAC KEY - %@"</span>, key);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 2. 对密码进行 hamc</span></span><br><span class="line">    <span class="built_in">NSString</span> *pwd = [<span class="keyword">self</span><span class="variable">.pwd</span> hmacMD5StringWithKey:key];</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 3. 取服务器时间</span></span><br><span class="line">    <span class="built_in">NSData</span> *data = [<span class="built_in">NSData</span> dataWithContentsOfURL:[<span class="built_in">NSURL</span> URLWithString:<span class="string">@"http://localhost/hmackey.php"</span>]];</span><br><span class="line">    <span class="built_in">NSDictionary</span> *dict = [<span class="built_in">NSJSONSerialization</span> JSONObjectWithData:data options:<span class="number">0</span> error:<span class="literal">NULL</span>];</span><br><span class="line">    <span class="built_in">NSString</span> *dateStr = dict[<span class="string">@"key"</span>];</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 4. 拼接时间字符串</span></span><br><span class="line">    pwd = [pwd stringByAppendingString:dateStr];</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 5. 再次 hmac 散列密码</span></span><br><span class="line">    <span class="keyword">return</span> [pwd hmacMD5StringWithKey:key];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+    
+  </div>
+  <footer class="end-sep">
+    
+      
+      
+    
+    <div class="clearfix"></div>
+  </footer>
+</article>
+
+
+  
+    <article class="post">
+  <header>
+    
+      <div class="icon"></div>
+      <a href="/2015/10/16/Base64/">
+  <time datetime="2015-10-16T08:19:45.000Z">
+    2015-10-16
+  </time>
+</a>
+    
+    
+  
+    <h1 class="title"><a href="/2015/10/16/Base64/">Base64</a></h1>
+  
+
+  </header>
+  
+  <div class="entry">
+    
+      <p>参考网站：<a href="http://zh.wikipedia.org/wiki/Base64" target="_blank" rel="external">http://zh.wikipedia.org/wiki/Base64</a></p>
+<h2 id="简介">简介</h2><ul>
+<li>是网络上使用最广泛的编码系统，能够将任何二进制数据，转换成只有 65 个字符组成的文本文件</li>
+<li><code>a~z,A~Z,0~9,+,/,=</code></li>
+<li><code>Base 64</code> 编码后的结果能够反算，不够安全</li>
+<li><strong><code>Base 64</code> 是所有现代加密算法的基础算法</strong></li>
+</ul>
+<h2 id="终端命令">终端命令</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 将 10.jpg 进行 base64 编码，生成 10.txt 文件</span></span><br><span class="line">$ base64 <span class="number">10</span>.jpg -o <span class="number">10</span>.txt</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将 10.txt 解码生成 1.jpg 文件</span></span><br><span class="line">$ base64 -D <span class="number">10</span>.txt -o <span class="number">1</span>.jpg</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将字符串 Man 进行 base64 编码</span></span><br><span class="line">$ <span class="built_in">echo</span> -n <span class="string">"Man"</span> | base64</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将字符串 TWFu 解码</span></span><br><span class="line">$ <span class="built_in">echo</span> -n <span class="string">"TWFu"</span> | base64 -D</span><br></pre></td></tr></table></figure>
+<h2 id="代码实现">代码实现</h2><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">///  BASE 64 编码</span></span><br><span class="line">- (<span class="built_in">NSString</span> *)base64Encode:(<span class="built_in">NSString</span> *)string &#123;</span><br><span class="line">    <span class="built_in">NSData</span> *data = [string dataUsingEncoding:<span class="built_in">NSUTF8StringEncoding</span>];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> [data base64EncodedStringWithOptions:<span class="number">0</span>];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">///  BASE 64 解码</span></span><br><span class="line">- (<span class="built_in">NSString</span> *)base64Decode:(<span class="built_in">NSString</span> *)string &#123;</span><br><span class="line">    <span class="built_in">NSData</span> *data = [[<span class="built_in">NSData</span> alloc] initWithBase64EncodedString:string options:<span class="number">0</span>];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> [[<span class="built_in">NSString</span> alloc] initWithData:data encoding:<span class="built_in">NSUTF8StringEncoding</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="保存_&amp;_加载用户信息">保存 &amp; 加载用户信息</h2><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">///  保存用户信息</span></span><br><span class="line">- (<span class="keyword">void</span>)saveUserInfo &#123;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">NSUserDefaults</span> *defaults = [<span class="built_in">NSUserDefaults</span> standardUserDefaults];</span><br><span class="line"></span><br><span class="line">    <span class="comment">// iOS 8.0 会直接写入沙盒，无需再使用 `[defaults synchronize];`</span></span><br><span class="line">    [defaults setObject:<span class="keyword">self</span><span class="variable">.username</span> forKey:HMUsernameKey];</span><br><span class="line"></span><br><span class="line">    <span class="built_in">NSString</span> *pwd = [<span class="keyword">self</span> base64Encode:<span class="keyword">self</span><span class="variable">.pwd</span>];</span><br><span class="line">    [defaults setObject:pwd forKey:HMUserPasswordKey];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">///  加载用户下信息</span></span><br><span class="line">- (<span class="keyword">void</span>)loadUserInfo &#123;</span><br><span class="line">    <span class="built_in">NSUserDefaults</span> *defaults = [<span class="built_in">NSUserDefaults</span> standardUserDefaults];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">self</span><span class="variable">.usernameText</span><span class="variable">.text</span> = [defaults stringForKey:HMUsernameKey];</span><br><span class="line">    <span class="keyword">self</span><span class="variable">.pwdText</span><span class="variable">.text</span> = [<span class="keyword">self</span> base64Decode:[defaults stringForKey:HMUserPasswordKey]];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="存在的问题">存在的问题</h2><ol>
+<li>使用 <code>Base64</code> 不能直接看到用户密码的明文</li>
+<li>但是 <code>Base64</code> 的算法是公开的，并且算法可逆，安全性并不好</li>
+</ol>
+
+    
+  </div>
+  <footer class="end-sep">
+    
+      
+      
+    
+    <div class="clearfix"></div>
+  </footer>
+</article>
+
+
+  
+    <article class="post">
+  <header>
+    
+      <div class="icon"></div>
+      <a href="/2015/10/16/密码学/">
+  <time datetime="2015-10-16T08:18:36.000Z">
+    2015-10-16
+  </time>
+</a>
+    
+    
+  
+    <h1 class="title"><a href="/2015/10/16/密码学/">密码学</a></h1>
+  
+
+  </header>
+  
+  <div class="entry">
+    
+      <h2 id="历史">历史</h2><ul>
+<li>公元前-上世纪70年代：<code>传统密码学</code>(密码本)</li>
+<li>上世纪70年代，<code>RSA</code> 算法的诞生开启了<code>现代密码学</code>的篇章</li>
+</ul>
+<h3 id="密码学趣闻">密码学趣闻</h3><ul>
+<li>跳舞的小人</li>
+<li>中途岛海战</li>
+</ul>
+<blockquote>
+<p>现代密码学 － 所有加密算法都是公开的！</p>
+</blockquote>
+<h2 id="散列(哈希)函数">散列(哈希)函数</h2><ul>
+<li><code>MD5</code>/<code>SHA1</code>/<code>SHA256</code>(美国国家安全局/苹果)/<code>SHA512</code></li>
+<li>对任意一个二进制数据进行加密，可以得到定长的字符串结果</li>
+<li><code>MD5</code> 加密结果是 <code>32</code> 个字符</li>
+<li>核心思想是从给定的数据中，抽取特征码，不容易产生重复！加密后的字符串通常被称为 <code>指纹</code>，<code>信息摘要</code></li>
+<li><code>MD5</code> 因为数据长度不够，现在国外基本上已经不怎么用了！国内用的很普遍</li>
+<li><a href="http://baike.baidu.com/subview/350813/7544439.htm" target="_blank" rel="external">王小云</a></li>
+<li>破解网站：<a href="http://www.cmd5.com" target="_blank" rel="external">http://www.cmd5.com</a></li>
+</ul>
+<h3 id="哈希函数的特点">哈希函数的特点</h3><blockquote>
+<p>相同的字符串，使用相同的算法，每次加密的结果是固定的</p>
+</blockquote>
+<h2 id="对称加密算法">对称加密算法</h2><ul>
+<li>加密和解密使用同一个秘钥，加密解密的速度快</li>
+<li>可以给大数据进行加密</li>
+<li>秘钥的安全性非常重要</li>
+<li>使用 RSA 给对称加密算法的秘钥进行加密</li>
+</ul>
+<h2 id="非对称加密算法_RSA">非对称加密算法 RSA</h2><ul>
+<li>使用 <code>公钥</code> 加密，使用 <code>私钥</code> 解密</li>
+<li>使用 <code>私钥</code> 加密，使用 <code>公钥</code> 解密</li>
+<li>更安全</li>
+<li>但是加密解密的速度极慢！</li>
+<li>只是给小数据进行加密</li>
+</ul>
+
+    
+  </div>
+  <footer class="end-sep">
+    
+      
+      
+    
+    <div class="clearfix"></div>
+  </footer>
+</article>
+
+
+  
+    <article class="post">
+  <header>
+    
+      <div class="icon"></div>
       <a href="/2015/10/16/核心动画/">
   <time datetime="2015-10-16T08:11:47.000Z">
     2015-10-16
@@ -266,126 +769,11 @@
 
 
   
-    <article class="post">
-  <header>
-    
-      <div class="icon"></div>
-      <a href="/2015/10/16/归档-解档/">
-  <time datetime="2015-10-16T07:43:22.000Z">
-    2015-10-16
-  </time>
-</a>
-    
-    
-  
-    <h1 class="title"><a href="/2015/10/16/归档-解档/">归档&amp;解档</a></h1>
-  
-
-  </header>
-  
-  <div class="entry">
-    
-      <ul>
-<li><code>归档 &amp; 解档</code>的概念与网络的<code>序列化&amp;反序列化</code>的概念非常像</li>
-<li>是 iOS 中在沙盒中保存自定义对象的一种手段</li>
-<li>要使用 <code>归档和解档</code> 需要：<ol>
-<li>在自定义对象中遵守 <code>NSCoding</code> 协议</li>
-<li>实现 <code>encodeWithCoder</code> 方法，将对象保存到磁盘之前，将对象转换成二进制数据</li>
-<li>实现 <code>initWithCoder</code> 方法，读取归档的二进制文件后，转换成自定义对象</li>
-<li>调用 <code>[NSKeyedArchiver archiveRootObject:p toFile:path];</code> 可以将自定义对象或数组归档保存至文件</li>
-<li>调用 <code>[NSKeyedUnarchiver unarchiveObjectWithFile:path];</code> 可以从归档保存的文件加载自定义对象或者数组</li>
-</ol>
-</li>
-</ul>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span><br><span class="line"> *  编码器：将对象保存到磁盘之前，将对象转换成二进制数据</span><br><span class="line"> *  概念：跟网络的序列化非常像</span><br><span class="line"> */</span></span><br><span class="line">- (<span class="keyword">void</span>)encodeWithCoder:(<span class="built_in">NSCoder</span> *)aCoder &#123;</span><br><span class="line">    [aCoder encodeObject:_name forKey:<span class="string">@"nameKey"</span>];</span><br><span class="line">    [aCoder encodeInt:_age forKey:<span class="string">@"ageKey"</span>];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span><br><span class="line"> *  解码器：读取归档的二进制文件后，转换成自定义对象</span><br><span class="line"> *</span><br><span class="line"> *  概念：网络的反序列化非常像</span><br><span class="line"> */</span></span><br><span class="line">- (<span class="keyword">id</span>)initWithCoder:(<span class="built_in">NSCoder</span> *)aDecoder &#123;</span><br><span class="line">    <span class="keyword">self</span> = [<span class="keyword">super</span> init];</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">self</span>) &#123;</span><br><span class="line">        <span class="comment">// key 一定要和归档的对应</span></span><br><span class="line">        _name = [aDecoder decodeObjectForKey:<span class="string">@"nameKey"</span>];</span><br><span class="line">        _age = [aDecoder decodeIntForKey:<span class="string">@"ageKey"</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">self</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>归档&amp;解档方法中的 key 一定要对应</p>
-</blockquote>
-
-    
-  </div>
-  <footer class="end-sep">
-    
-      
-      
-    
-    <div class="clearfix"></div>
-  </footer>
-</article>
-
-
-  
-    <article class="post">
-  <header>
-    
-      <div class="icon"></div>
-      <a href="/2015/09/25/关于XcodeGhost/">
-  <time datetime="2015-09-25T05:32:34.000Z">
-    2015-09-25
-  </time>
-</a>
-    
-    
-  
-    <h1 class="title"><a href="/2015/09/25/关于XcodeGhost/">关于XcodeGhost</a></h1>
-  
-
-  </header>
-  
-  <div class="entry">
-    
-      <h1 id="关于这次_Ghost_事件，我是也很虚的。因为众所周知的原因的，之前也在百度网盘下载的Xcode，而且正好是各种消息爆出来的那个网盘。还好检测了一下，没被染上。">关于这次 Ghost 事件，我是也很虚的。因为众所周知的原因的，之前也在百度网盘下载的Xcode，而且正好是各种消息爆出来的那个网盘。还好检测了一下，没被染上。</h1><h1 id="最近全部改成_AppStore_更新_Xcode_了。">最近全部改成 AppStore 更新 Xcode 了。</h1>
-    
-  </div>
-  <footer class="end-sep">
-    
-      
-      
-    
-    <div class="clearfix"></div>
-  </footer>
-</article>
-
-
-  
-    <article class="post">
-  <header>
-    
-      <div class="icon"></div>
-      <a href="/2015/09/14/Xcode7-0GM版遇到的小BUG/">
-  <time datetime="2015-09-14T13:44:48.000Z">
-    2015-09-14
-  </time>
-</a>
-    
-    
-  
-    <h1 class="title"><a href="/2015/09/14/Xcode7-0GM版遇到的小BUG/">Xcode7.0GM版遇到的小BUG</a></h1>
-  
-
-  </header>
-  
-  <div class="entry">
-    
-      <p>#####这两天苹果终于放出Xcode7的gm版,虽然不是正式版,但是比之前beta强太多了,立马就卸载了beta安装上了GM尝鲜.</p>
-<p>#####但是在使用过程中发现,新建的项目项目命如果用中文加数字组合就会报野指针错误.</p>
-
-    
-  </div>
-  <footer class="end-sep">
-    
-      
-      
-    
-    <div class="clearfix"></div>
-  </footer>
-</article>
-
-
-  
 
   <nav id="pagination">
   
+  
+    <a href="/page/2/" class="next">下一页</a>
   
   <div class="clearfix"></div>
 </nav>
