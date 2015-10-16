@@ -1,0 +1,141 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  
+  <title>Cocoapods | 悟者</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  
+    <meta name="author" content="wuzer">
+  
+  
+    <meta name="description" content="CocoaPods 是 iOS 最常用最有名的类库管理工具
+作为 iOS 程序员，掌握 CocoaPods 的使用是必不可少的基本技能
+
+安装12345678# 添加源$ sudo gem sources -a http://ruby.taobao.org/# 删除源$ sudo gem sources -r https://rubygems.org/# 安装$ sudo gem install">
+  
+  <meta name="description" content="CocoaPods 是 iOS 最常用最有名的类库管理工具
+作为 iOS 程序员，掌握 CocoaPods 的使用是必不可少的基本技能
+
+安装12345678# 添加源$ sudo gem sources -a http://ruby.taobao.org/# 删除源$ sudo gem sources -r https://rubygems.org/# 安装$ sudo gem install">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Cocoapods">
+<meta property="og:url" content="http://yoursite.com/2015/10/16/Cocoapods/index.html">
+<meta property="og:site_name" content="悟者">
+<meta property="og:description" content="CocoaPods 是 iOS 最常用最有名的类库管理工具
+作为 iOS 程序员，掌握 CocoaPods 的使用是必不可少的基本技能
+
+安装12345678# 添加源$ sudo gem sources -a http://ruby.taobao.org/# 删除源$ sudo gem sources -r https://rubygems.org/# 安装$ sudo gem install">
+<meta property="og:updated_time" content="2015-10-16T08:01:29.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Cocoapods">
+<meta name="twitter:description" content="CocoaPods 是 iOS 最常用最有名的类库管理工具
+作为 iOS 程序员，掌握 CocoaPods 的使用是必不可少的基本技能
+
+安装12345678# 添加源$ sudo gem sources -a http://ruby.taobao.org/# 删除源$ sudo gem sources -r https://rubygems.org/# 安装$ sudo gem install">
+  
+    <link rel="alternate" href="/atom.xml" title="悟者" type="application/atom+xml">
+  
+  
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+</head>
+
+<body>
+  <div class="wrapper">
+    <header id="header">
+  <div class="title">
+    <h1><a href="/">悟者</a></h1>
+    <p><a href="/">90后,摩羯座,iOS攻城师</a></p>
+  </div>
+  <nav class="nav">
+    <ul>
+      
+        <li><a href="/">Home</a></li>
+      
+        <li><a href="/archives">Archives</a></li>
+      
+      
+        <li><a href="/atom.xml">RSS</a></li>
+      
+    </ul>
+    <div class="clearfix"></div>
+  </nav>
+  <div class="clearfix"></div>
+</header>
+    <div class="content"><article class="post">
+  <header>
+    
+      <div class="icon"></div>
+      <a href="/2015/10/16/Cocoapods/">
+  <time datetime="2015-10-16T08:01:01.000Z">
+    2015-10-16
+  </time>
+</a>
+    
+    
+  
+    <h1 class="title">Cocoapods</h1>
+  
+
+  </header>
+  
+  <div class="entry">
+    
+      <ul>
+<li><code>CocoaPods</code> 是 iOS 最常用最有名的类库管理工具</li>
+<li>作为 iOS 程序员，掌握 CocoaPods 的使用是必不可少的基本技能</li>
+</ul>
+<h2 id="安装">安装</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 添加源</span></span><br><span class="line">$ sudo gem sources <span class="operator">-a</span> http://ruby.taobao.org/</span><br><span class="line"><span class="comment"># 删除源</span></span><br><span class="line">$ sudo gem sources -r https://rubygems.org/</span><br><span class="line"><span class="comment"># 安装</span></span><br><span class="line">$ sudo gem install cocoapods</span><br><span class="line"><span class="comment"># 设置</span></span><br><span class="line">$ pod setup</span><br></pre></td></tr></table></figure>
+<h2 id="使用">使用</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 搜索</span></span><br><span class="line">$ pod search AFNetworking</span><br><span class="line"><span class="comment"># 生成 Podfile</span></span><br><span class="line">$ <span class="built_in">echo</span> <span class="string">"pod 'AFNetworking'"</span> &gt; Podfile</span><br><span class="line"><span class="comment"># 安装</span></span><br><span class="line">$ pod install</span><br><span class="line"><span class="comment"># 升级</span></span><br><span class="line">$ pod update</span><br></pre></td></tr></table></figure>
+<h3 id="git_操作">git 操作</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 将修改添加到暂存区</span></span><br><span class="line">$ git add .</span><br><span class="line"></span><br><span class="line"><span class="comment"># 提交修改</span></span><br><span class="line">$ git commit -m <span class="string">"添加 AFN框架程序"</span></span><br></pre></td></tr></table></figure>
+<h2 id="gem_常用命令">gem 常用命令</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看gem源</span></span><br><span class="line">$ gem sources –l</span><br><span class="line"><span class="comment"># gem自身升级</span></span><br><span class="line">$ sudo gem update --system</span><br><span class="line"><span class="comment"># 查看版本</span></span><br><span class="line">$ gem --version</span><br><span class="line"><span class="comment"># 清除过期的gem</span></span><br><span class="line">$ sudo gem cleanup</span><br><span class="line"><span class="comment"># 安装包</span></span><br><span class="line">$ sudo gem install cocoapods</span><br><span class="line"><span class="comment"># 删除包</span></span><br><span class="line">$ gem uninstall cocoapods</span><br><span class="line"><span class="comment"># 更新包</span></span><br><span class="line">$ sudo gem update</span><br><span class="line"><span class="comment"># 列出本地安装的包</span></span><br><span class="line">$ gem list</span><br></pre></td></tr></table></figure>
+<h2 id="插件">插件</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -fsSL https://raw.github.com/supermarin/Alcatraz/master/Scripts/install.sh | sh</span><br></pre></td></tr></table></figure>
+<p>github 地址：<a href="https://github.com/supermarin/Alcatraz" target="_blank" rel="external">https://github.com/supermarin/Alcatraz</a></p>
+
+    
+  </div>
+  <footer>
+    
+      
+      
+    
+    <div class="clearfix"></div>
+  </footer>
+</article>
+
+</div>
+  </div>
+  <footer id="footer"><div class="copyright">
+  
+  &copy; 2015 <a href="/">wuzer</a>
+  
+</div>
+<div class="theme-copyright">
+  Theme by <a href="https://github.com/orderedlist" target="_blank">orderedlist</a>
+   | 
+  Redesign by <a href="http://heroicyang.com/" target="_blank">Heroic Yang</a>
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+<script src="/js/scale.fix.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+  (function($){
+    $('.fancybox').fancybox();
+  })(jQuery);
+</script>
+
+</body>
+</html>
