@@ -188,6 +188,67 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-UIcollectoinviewCell选中状态颜色设置" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/12/29/UIcollectoinviewCell选中状态颜色设置/" class="article-date">
+  	<time datetime="2015-12-29T07:23:34.000Z" itemprop="datePublished">2015-12-29</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/12/29/UIcollectoinviewCell选中状态颜色设置/">UIcollectoinviewCell选中状态颜色设置</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>这两天有个朋友想写个日历的app，用的UICollectionView搭建界面，写的过程中，他是需要改变每个cell的选中状态颜色和非选中颜色，而且cell是支持多个同时选中，然后他遇到的问题是当改变当前cell颜色，点击另外一个的时候，上一个cell的颜色会被清除，当前会变成选中，就是多选失效了。<br>    当时朋友把代码发给我看，我的想法其实是和他一样的，在cell的didSelected方法里面获取当前选中cell，改变当前cell的状态.但是这个正确的想法却没有正确的执行，我想肯定有哪些地方没有设置，导致出了问题。虽然collectionView用了不少次，但是之前一直没有这个需求改过选中状态，我就想先看看别人是怎么改的。在stackOverFlow上面搜索了下“Highlight collection cell when selected”，发现有好多人已经问过这个问题，点开第一条进去看了下，里面的一个回答直接贴的代码</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">-(<span class="built_in">UICollectionViewCell</span> *)collectionView:(<span class="built_in">UICollectionView</span> *)collectionView    cellForItemAtIndexPath:(<span class="built_in">NSIndexPath</span> *)indexPath</span><br><span class="line">&#123;</span><br><span class="line"><span class="built_in">UICollectionViewCell</span> *cell = [collectionView dequeueReusableCellWithReuseIdentifier:<span class="string">@"cvCell"</span> forIndexPath:indexPath];</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (cell<span class="variable">.selected</span>) &#123;</span><br><span class="line"> cell<span class="variable">.backgroundColor</span> = [<span class="built_in">UIColor</span> blueColor]; <span class="comment">// highlight selection </span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">&#123;</span><br><span class="line"> cell<span class="variable">.backgroundColor</span> = [<span class="built_in">UIColor</span> redColor]; <span class="comment">// Default color</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> cell;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">-(<span class="keyword">void</span>)collectionView:(<span class="built_in">UICollectionView</span> *)collectionView didSelectItemAtIndexPath:(<span class="built_in">NSIndexPath</span> *)indexPath  &#123;</span><br><span class="line"></span><br><span class="line"><span class="built_in">UICollectionViewCell</span> *datasetCell =[collectionView cellForItemAtIndexPath:indexPath];</span><br><span class="line">datasetCell<span class="variable">.backgroundColor</span> = [<span class="built_in">UIColor</span> blueColor]; <span class="comment">// highlight selection</span></span><br><span class="line">&#125;  </span><br><span class="line">-(<span class="keyword">void</span>)collectionView:(<span class="built_in">UICollectionView</span> *)collectionView didDeselectItemAtIndexPath:(<span class="built_in">NSIndexPath</span> *)indexPath</span><br><span class="line">&#123;</span><br><span class="line"><span class="built_in">UICollectionViewCell</span> *datasetCell =[collectionView cellForItemAtIndexPath:indexPath]; </span><br><span class="line">datasetCell<span class="variable">.backgroundColor</span> = [<span class="built_in">UIColor</span> redColor]; <span class="comment">// Default color</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>看了代码后，和我们思路是一样的，没有解决我们的问题。继续找，有个回复给了一个属性</p>
+<blockquote>
+<p>@property(nonatomic) BOOL allowsMultipleSelection</p>
+</blockquote>
+<p>看了文档，是这样解释的<br>This property controls whether multiple items can be selected simultaneously. The default value of this property is NO.</p>
+<blockquote>
+<p>When the value of this property is YES, tapping a cell adds it to the current selection (assuming the delegate permits the cell to be selected). Tapping the cell again removes it from the selection.</p>
+</blockquote>
+<p>这个属性是控制cell多选的，默认是NO，当设置为YES时才可以添加当前选中的cell在组中。<br>在控制器里面把这个属性设置为yes后就可以多选了。</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
     <article id="post-非对称加密算法" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -985,66 +1046,6 @@
 </tr>
 </tbody>
 </table>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-    <article id="post-Cocoapods" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/10/16/Cocoapods/" class="article-date">
-  	<time datetime="2015-10-16T08:01:01.000Z" itemprop="datePublished">2015-10-16</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/10/16/Cocoapods/">Cocoapods</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <ul>
-<li><code>CocoaPods</code> 是 iOS 最常用最有名的类库管理工具</li>
-<li>作为 iOS 程序员，掌握 CocoaPods 的使用是必不可少的基本技能</li>
-</ul>
-<h2 id="安装">安装</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 添加源</span></span><br><span class="line">$ sudo gem sources <span class="operator">-a</span> http://ruby.taobao.org/</span><br><span class="line"><span class="comment"># 删除源</span></span><br><span class="line">$ sudo gem sources -r https://rubygems.org/</span><br><span class="line"><span class="comment"># 安装</span></span><br><span class="line">$ sudo gem install cocoapods</span><br><span class="line"><span class="comment"># 设置</span></span><br><span class="line">$ pod setup</span><br></pre></td></tr></table></figure>
-<h2 id="使用">使用</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 搜索</span></span><br><span class="line">$ pod search AFNetworking</span><br><span class="line"><span class="comment"># 生成 Podfile</span></span><br><span class="line">$ <span class="built_in">echo</span> <span class="string">"pod 'AFNetworking'"</span> &gt; Podfile</span><br><span class="line"><span class="comment"># 安装</span></span><br><span class="line">$ pod install</span><br><span class="line"><span class="comment"># 升级</span></span><br><span class="line">$ pod update</span><br></pre></td></tr></table></figure>
-<h3 id="git_操作">git 操作</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 将修改添加到暂存区</span></span><br><span class="line">$ git add .</span><br><span class="line"></span><br><span class="line"><span class="comment"># 提交修改</span></span><br><span class="line">$ git commit -m <span class="string">"添加 AFN框架程序"</span></span><br></pre></td></tr></table></figure>
-<h2 id="gem_常用命令">gem 常用命令</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看gem源</span></span><br><span class="line">$ gem sources –l</span><br><span class="line"><span class="comment"># gem自身升级</span></span><br><span class="line">$ sudo gem update --system</span><br><span class="line"><span class="comment"># 查看版本</span></span><br><span class="line">$ gem --version</span><br><span class="line"><span class="comment"># 清除过期的gem</span></span><br><span class="line">$ sudo gem cleanup</span><br><span class="line"><span class="comment"># 安装包</span></span><br><span class="line">$ sudo gem install cocoapods</span><br><span class="line"><span class="comment"># 删除包</span></span><br><span class="line">$ gem uninstall cocoapods</span><br><span class="line"><span class="comment"># 更新包</span></span><br><span class="line">$ sudo gem update</span><br><span class="line"><span class="comment"># 列出本地安装的包</span></span><br><span class="line">$ gem list</span><br></pre></td></tr></table></figure>
-<h2 id="插件">插件</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -fsSL https://raw.github.com/supermarin/Alcatraz/master/Scripts/install.sh | sh</span><br></pre></td></tr></table></figure>
-<p>github 地址：<a href="https://github.com/supermarin/Alcatraz" target="_blank" rel="external">https://github.com/supermarin/Alcatraz</a></p>
 
       
     </div>
