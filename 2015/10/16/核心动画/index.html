@@ -21,7 +21,7 @@
   
     <link rel="icon" href="/favicon.png">
   
-  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
   <div id="container">
@@ -104,9 +104,9 @@
 					        
 								<a class="weibo" target="_blank" href="/weibo.com/94217117" title="weibo">weibo</a>
 					        
-								<a class="rss" target="_blank" href="/#" title="rss">rss</a>
+								<a class="rss" target="_blank" href="#" title="rss">rss</a>
 					        
-								<a class="zhihu" target="_blank" href="/#" title="zhihu">zhihu</a>
+								<a class="zhihu" target="_blank" href="#" title="zhihu">zhihu</a>
 					        
 						</div>
 					</nav>
@@ -178,9 +178,9 @@
 			        
 						<a class="weibo" target="_blank" href="/weibo.com/94217117" title="weibo">weibo</a>
 			        
-						<a class="rss" target="_blank" href="/#" title="rss">rss</a>
+						<a class="rss" target="_blank" href="#" title="rss">rss</a>
 			        
-						<a class="zhihu" target="_blank" href="/#" title="zhihu">zhihu</a>
+						<a class="zhihu" target="_blank" href="#" title="zhihu">zhihu</a>
 			        
 				</div>
 			</nav>
@@ -220,7 +220,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span><br><span class="line"> CAKeyframeAnimation    path/values</span><br><span class="line"> CABasicAnimation       fromValue/toValue</span><br><span class="line"> */</span></span><br><span class="line">- (<span class="keyword">void</span>)touchesBegan:(<span class="built_in">NSSet</span> *)touches withEvent:(<span class="built_in">UIEvent</span> *)event &#123;</span><br><span class="line">    <span class="comment">// 1. 位移动画</span></span><br><span class="line">    <span class="built_in">CAKeyframeAnimation</span> *anim1 = [<span class="built_in">CAKeyframeAnimation</span> animationWithKeyPath:<span class="string">@"position"</span>];</span><br><span class="line"></span><br><span class="line">    <span class="built_in">UIBezierPath</span> *path = [<span class="built_in">UIBezierPath</span> bezierPathWithOvalInRect:<span class="built_in">CGRectMake</span>(<span class="number">50</span>, <span class="number">50</span>, <span class="number">250</span>, <span class="number">250</span>)];</span><br><span class="line">    anim1<span class="variable">.path</span> = path<span class="variable">.CGPath</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 2. 旋转动画</span></span><br><span class="line">    <span class="built_in">CABasicAnimation</span> *anim2 = [<span class="built_in">CABasicAnimation</span> animationWithKeyPath:<span class="string">@"transform.rotation"</span>];</span><br><span class="line">    anim2<span class="variable">.toValue</span> = @(<span class="number">2</span> * M_PI);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 3. 缩放动画</span></span><br><span class="line">    <span class="built_in">CAKeyframeAnimation</span> *anim3 = [<span class="built_in">CAKeyframeAnimation</span> animationWithKeyPath:<span class="string">@"transform.scale"</span>];</span><br><span class="line">    anim3<span class="variable">.values</span> = @[@<span class="number">1</span>, @<span class="number">0.1</span>, @<span class="number">1.2</span>];</span><br><span class="line"></span><br><span class="line">    <span class="built_in">CAAnimationGroup</span> *group = [[<span class="built_in">CAAnimationGroup</span> alloc] init];</span><br><span class="line">    group<span class="variable">.animations</span> = @[anim1, anim2, anim3];</span><br><span class="line">    group<span class="variable">.duration</span> = <span class="number">2.0</span>;</span><br><span class="line">    group<span class="variable">.repeatCount</span> = MAXFLOAT;</span><br><span class="line"></span><br><span class="line">    [<span class="keyword">self</span><span class="variable">.myView</span><span class="variable">.layer</span> addAnimation:group forKey:<span class="literal">nil</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"><span class="comment"> CAKeyframeAnimation    path/values</span></div><div class="line"><span class="comment"> CABasicAnimation       fromValue/toValue</span></div><div class="line"><span class="comment"> */</span></div><div class="line">- (<span class="keyword">void</span>)touchesBegan:(<span class="built_in">NSSet</span> *)touches withEvent:(<span class="built_in">UIEvent</span> *)event &#123;</div><div class="line">    <span class="comment">// 1. 位移动画</span></div><div class="line">    <span class="built_in">CAKeyframeAnimation</span> *anim1 = [<span class="built_in">CAKeyframeAnimation</span> animationWithKeyPath:<span class="string">@"position"</span>];</div><div class="line"></div><div class="line">    <span class="built_in">UIBezierPath</span> *path = [<span class="built_in">UIBezierPath</span> bezierPathWithOvalInRect:<span class="built_in">CGRectMake</span>(<span class="number">50</span>, <span class="number">50</span>, <span class="number">250</span>, <span class="number">250</span>)];</div><div class="line">    anim1.path = path.CGPath;</div><div class="line"></div><div class="line">    <span class="comment">// 2. 旋转动画</span></div><div class="line">    <span class="built_in">CABasicAnimation</span> *anim2 = [<span class="built_in">CABasicAnimation</span> animationWithKeyPath:<span class="string">@"transform.rotation"</span>];</div><div class="line">    anim2.toValue = @(<span class="number">2</span> * M_PI);</div><div class="line"></div><div class="line">    <span class="comment">// 3. 缩放动画</span></div><div class="line">    <span class="built_in">CAKeyframeAnimation</span> *anim3 = [<span class="built_in">CAKeyframeAnimation</span> animationWithKeyPath:<span class="string">@"transform.scale"</span>];</div><div class="line">    anim3.values = @[@<span class="number">1</span>, @<span class="number">0.1</span>, @<span class="number">1.2</span>];</div><div class="line"></div><div class="line">    <span class="built_in">CAAnimationGroup</span> *group = [[<span class="built_in">CAAnimationGroup</span> alloc] init];</div><div class="line">    group.animations = @[anim1, anim2, anim3];</div><div class="line">    group.duration = <span class="number">2.0</span>;</div><div class="line">    group.repeatCount = MAXFLOAT;</div><div class="line"></div><div class="line">    [<span class="keyword">self</span>.myView.layer addAnimation:group forKey:<span class="literal">nil</span>];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 
       
     </div>
@@ -305,7 +305,7 @@
 </footer>
     </div>
     
-  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
 
 
 <script>
@@ -321,8 +321,8 @@
 		open_in_new: false
 	}
 </script>
-<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js" type="text/javascript"></script>
-<script src="/js/main.js" type="text/javascript"></script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
 
 
 

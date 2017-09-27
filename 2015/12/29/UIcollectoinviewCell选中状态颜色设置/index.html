@@ -21,7 +21,7 @@
   
     <link rel="icon" href="/favicon.png">
   
-  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
   <div id="container">
@@ -104,9 +104,9 @@
 					        
 								<a class="weibo" target="_blank" href="/weibo.com/94217117" title="weibo">weibo</a>
 					        
-								<a class="rss" target="_blank" href="/#" title="rss">rss</a>
+								<a class="rss" target="_blank" href="#" title="rss">rss</a>
 					        
-								<a class="zhihu" target="_blank" href="/#" title="zhihu">zhihu</a>
+								<a class="zhihu" target="_blank" href="#" title="zhihu">zhihu</a>
 					        
 						</div>
 					</nav>
@@ -178,9 +178,9 @@
 			        
 						<a class="weibo" target="_blank" href="/weibo.com/94217117" title="weibo">weibo</a>
 			        
-						<a class="rss" target="_blank" href="/#" title="rss">rss</a>
+						<a class="rss" target="_blank" href="#" title="rss">rss</a>
 			        
-						<a class="zhihu" target="_blank" href="/#" title="zhihu">zhihu</a>
+						<a class="zhihu" target="_blank" href="#" title="zhihu">zhihu</a>
 			        
 				</div>
 			</nav>
@@ -221,7 +221,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>这两天有个朋友想写个日历的app，用的UICollectionView搭建界面，写的过程中，他是需要改变每个cell的选中状态颜色和非选中颜色，而且cell是支持多个同时选中，然后他遇到的问题是当改变当前cell颜色，点击另外一个的时候，上一个cell的颜色会被清除，当前会变成选中，就是多选失效了。<br>    当时朋友把代码发给我看，我的想法其实是和他一样的，在cell的didSelected方法里面获取当前选中cell，改变当前cell的状态.但是这个正确的想法却没有正确的执行，我想肯定有哪些地方没有设置，导致出了问题。虽然collectionView用了不少次，但是之前一直没有这个需求改过选中状态，我就想先看看别人是怎么改的。在stackOverFlow上面搜索了下“Highlight collection cell when selected”，发现有好多人已经问过这个问题，点开第一条进去看了下，里面的一个回答直接贴的代码</p>
-<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">-(<span class="built_in">UICollectionViewCell</span> *)collectionView:(<span class="built_in">UICollectionView</span> *)collectionView    cellForItemAtIndexPath:(<span class="built_in">NSIndexPath</span> *)indexPath</span><br><span class="line">&#123;</span><br><span class="line"><span class="built_in">UICollectionViewCell</span> *cell = [collectionView dequeueReusableCellWithReuseIdentifier:<span class="string">@"cvCell"</span> forIndexPath:indexPath];</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (cell<span class="variable">.selected</span>) &#123;</span><br><span class="line"> cell<span class="variable">.backgroundColor</span> = [<span class="built_in">UIColor</span> blueColor]; <span class="comment">// highlight selection </span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">&#123;</span><br><span class="line"> cell<span class="variable">.backgroundColor</span> = [<span class="built_in">UIColor</span> redColor]; <span class="comment">// Default color</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> cell;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">-(<span class="keyword">void</span>)collectionView:(<span class="built_in">UICollectionView</span> *)collectionView didSelectItemAtIndexPath:(<span class="built_in">NSIndexPath</span> *)indexPath  &#123;</span><br><span class="line"></span><br><span class="line"><span class="built_in">UICollectionViewCell</span> *datasetCell =[collectionView cellForItemAtIndexPath:indexPath];</span><br><span class="line">datasetCell<span class="variable">.backgroundColor</span> = [<span class="built_in">UIColor</span> blueColor]; <span class="comment">// highlight selection</span></span><br><span class="line">&#125;  </span><br><span class="line">-(<span class="keyword">void</span>)collectionView:(<span class="built_in">UICollectionView</span> *)collectionView didDeselectItemAtIndexPath:(<span class="built_in">NSIndexPath</span> *)indexPath</span><br><span class="line">&#123;</span><br><span class="line"><span class="built_in">UICollectionViewCell</span> *datasetCell =[collectionView cellForItemAtIndexPath:indexPath]; </span><br><span class="line">datasetCell<span class="variable">.backgroundColor</span> = [<span class="built_in">UIColor</span> redColor]; <span class="comment">// Default color</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">-(<span class="built_in">UICollectionViewCell</span> *)collectionView:(<span class="built_in">UICollectionView</span> *)collectionView    cellForItemAtIndexPath:(<span class="built_in">NSIndexPath</span> *)indexPath</div><div class="line">&#123;</div><div class="line"><span class="built_in">UICollectionViewCell</span> *cell = [collectionView dequeueReusableCellWithReuseIdentifier:<span class="string">@"cvCell"</span> forIndexPath:indexPath];</div><div class="line"></div><div class="line"><span class="keyword">if</span> (cell.selected) &#123;</div><div class="line"> cell.backgroundColor = [<span class="built_in">UIColor</span> blueColor]; <span class="comment">// highlight selection </span></div><div class="line">&#125;</div><div class="line"><span class="keyword">else</span></div><div class="line">&#123;</div><div class="line"> cell.backgroundColor = [<span class="built_in">UIColor</span> redColor]; <span class="comment">// Default color</span></div><div class="line">&#125;</div><div class="line"><span class="keyword">return</span> cell;</div><div class="line">&#125;</div><div class="line"></div><div class="line">-(<span class="keyword">void</span>)collectionView:(<span class="built_in">UICollectionView</span> *)collectionView didSelectItemAtIndexPath:(<span class="built_in">NSIndexPath</span> *)indexPath  &#123;</div><div class="line"></div><div class="line"><span class="built_in">UICollectionViewCell</span> *datasetCell =[collectionView cellForItemAtIndexPath:indexPath];</div><div class="line">datasetCell.backgroundColor = [<span class="built_in">UIColor</span> blueColor]; <span class="comment">// highlight selection</span></div><div class="line">&#125;  </div><div class="line">-(<span class="keyword">void</span>)collectionView:(<span class="built_in">UICollectionView</span> *)collectionView didDeselectItemAtIndexPath:(<span class="built_in">NSIndexPath</span> *)indexPath</div><div class="line">&#123;</div><div class="line"><span class="built_in">UICollectionViewCell</span> *datasetCell =[collectionView cellForItemAtIndexPath:indexPath]; </div><div class="line">datasetCell.backgroundColor = [<span class="built_in">UIColor</span> redColor]; <span class="comment">// Default color</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>看了代码后，和我们思路是一样的，没有解决我们的问题。继续找，有个回复给了一个属性</p>
 <blockquote>
 <p>@property(nonatomic) BOOL allowsMultipleSelection</p>
@@ -316,7 +316,7 @@
 </footer>
     </div>
     
-  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
 
 
 <script>
@@ -332,8 +332,8 @@
 		open_in_new: false
 	}
 </script>
-<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js" type="text/javascript"></script>
-<script src="/js/main.js" type="text/javascript"></script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
 
 
 
